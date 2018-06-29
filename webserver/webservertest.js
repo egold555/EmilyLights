@@ -15,7 +15,7 @@ var OPC = require('./opc')
 var client = new OPC('192.168.1.122', 7890);
 
 var SceneClass = require('./scenes');
-var sceneRainbow = new SceneClass.SceneRainbow(client);
+var sceneRainbow = new SceneClass.SceneTest(client);
 
 http.createServer(function (req, res) {
     console.log(`${req.method} ${req.url}`);
@@ -91,4 +91,4 @@ function coolTimer() {
     sceneRainbow.loop();
 }
 
-setInterval(coolTimer, 500);
+setInterval(coolTimer, 30);
