@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="jquery-1.10.1.min.js"></script>
+    <style type="text/css">
+        body {
+            background: #222;
+            color: #ddd;
+            font: 15px verdana;
+        }
+
+        #connectionStatus {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+    </style>
+    <script type="text/javascript">
+        $(function() {
+
+
+            // Set Default Black Color.
+            var defaultColor = {
+                r: 0,
+                b: 0,
+                g: 0
+            };
+
+            // Set Queue Speed, default is 3 seconds.
+            var speed = 500;
+            var frequency = .3;
+            var changer = 0;
+
+            // Set all pixels to a given color
+            function writeFrame() {
+                var leds = 64;
+                var packet = new Uint8ClampedArray(4 + leds * 3);
+                // console.log(packet);
+                if (socket.readyState != 1 /* OPEN */ ) {
+                    // The server connection isn't open. Nothing to do.
+                    return;
+                }
+
+                if (socket.bufferedAmount > packet.length) {
+                    // The network is lagging, and we still haven't sent the previous frame.
+                    // Don't flood the network, it will just make us laggy.
+                    // If fcserver is running on the same computer, it should always be able
+                    // to keep up with the frames we send, so we shouldn't reach this point.
+                    return;
+                }
+
+                for (var led = 0; led < leds; led++) {
+
+                    var red = Math.sin(frequency * changer + 0) * 127 + 128;
+                    var green = Math.sin(frequency * changer + 2) * 127 + 128;
+                    var blue = Math.sin(frequency * changer + 4) * 127 + 128;
+
+                    changer += 1;
+
+                    setPixel(packet, led, red, green, blue);
+
+
+                }
+                socket.send(packet.buffer);
+            }
+
+            function setPixel(packet, led, red, green, blue) {
+                var dest = 4 + (led * 3); //4 is header, 3 is rgb offset thingy
+                packet[dest++] = red;
+                packet[dest++] = green;
+                packet[dest++] = blue;
+                console.log(led);
+            }
+
+            // Animation loop
+            var animate = function() {
+                writeFrame();
+                setTimeout(animate, speed);
+            }
+
+            // Connect to a Fadecandy server running on the same computer, on the default port
+            var socket = new WebSocket('ws://192.168.1.122:7890');
+
+            // Put some connection status text in the corner of the screen
+            $('#connectionStatus').text('Connecting to fcserver...');
+            socket.onclose = function(event) {
+                $('#connectionStatus').text('Not connected to fcserver');
+            }
+            socket.onopen = function(event) {
+                $('#connectionStatus').text('Connected');
+                animate();
+            }
+
+            $("#rand").append(Math.random());
+
+        })
+
+    </script>
+</head>
+
+<body>
+    <form>
+
+        <div id="connectionStatus"></div>
+
+        <br/>
+
+        <div id="rand"></div>
+
+    </form>
+</body>
+
+</html>

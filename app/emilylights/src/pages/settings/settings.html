@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Settings</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class=" cards-bg">
+    <ion-card class="cards-list-demo">
+        <ion-card-header>General</ion-card-header>
+        <ion-list>
+
+            <ion-item>
+                <ion-label>Enabled</ion-label>
+                <ion-toggle [(ngModel)]="wall_enabled" checked="true"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Brightness</ion-label>
+                <ion-range [(ngModel)]="wall_brightness">
+                    <ion-icon range-left small name="sunny"></ion-icon>
+                    <ion-icon range-right name="sunny"></ion-icon>
+                </ion-range>
+            </ion-item>
+
+        </ion-list>
+    </ion-card>
+
+    <ion-card class="cards-list-demo">
+        <ion-card-header>Web Server</ion-card-header>
+        <ion-list>
+
+            <ion-item>
+                <ion-label fixed>IP</ion-label>
+                <ion-input id="id_ip" type="text" [(ngModel)]="value_ip" (keypress)="onIPChange($event)"></ion-input>
+            </ion-item>
+
+        </ion-list>
+    </ion-card>
+
+</ion-content>

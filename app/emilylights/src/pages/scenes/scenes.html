@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Scenes</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="toggleEdit()">{{editButton}}</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+
+    <ion-list [reorder]="editing" (ionItemReorder)="reorderData($event)">
+
+        <ion-item-sliding *ngFor="let scene of scenes">
+            <ion-item>
+                <ion-thumbnail item-start>
+                    <img src="{{ scene.img }}">
+                </ion-thumbnail>
+                <h2>{{ scene.name }}</h2>
+            </ion-item>
+            <ion-item-options>
+                <button ion-button (click)="itemApply(scene)" color="primary" icon-start><ion-icon name="eye"></ion-icon>Apply</button>
+                <button ion-button (click)="itemEdit(scene)" color="secondary" icon-start><ion-icon name="brush"></ion-icon>Edit</button>
+                <button ion-button (click)="itemDelete(scene)" color="danger" icon-start><ion-icon name="trash"></ion-icon>Delete</button>
+            </ion-item-options>
+
+        </ion-item-sliding>
+
+    </ion-list>
+
+    <button ion-button block (click)="refreshData()">Refresh</button>
+
+</ion-content>
