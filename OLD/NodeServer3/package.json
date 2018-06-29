@@ -1,0 +1,14 @@
+{
+  "name": "nodeserver3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "testing.js",
+  "scripts": {
+    "test": "node testing.js"
+  },
+  "author": "Eric",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^5.2.1"
+  }
+}
