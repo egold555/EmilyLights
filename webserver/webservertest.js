@@ -9,15 +9,13 @@ const port = process.argv[2] || 9000;
 const util = require('util');
 const setTimeoutPromise = util.promisify(setTimeout);
 
-var scenes = require('./scenes.js');
-
 var selectedScene = 0;
 
 var OPC = require('./opc')
 var client = new OPC('192.168.1.122', 7890);
 
-var SceneClass = require('./classexample');
-var sceneObj = new SceneClass.("Hi");
+var SceneClass = require('./scenes');
+var sceneRainbow = new SceneClass.SceneRainbow(client);
 
 http.createServer(function (req, res) {
     console.log(`${req.method} ${req.url}`);
@@ -88,13 +86,9 @@ http.createServer(function (req, res) {
 }).listen(parseInt(port));
 console.log(`Server listening on port ${port}`);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-console.log(JSON.stringify(sceneObj.options));
-scenes._INIT(client);
 
 function coolTimer() {
-    if (selectedScene != -1) {
-        scenes._LOOP(selectedScene);
-    }
+    sceneRainbow.loop();
 }
 
-setInterval(coolTimer, 200);
+setInterval(coolTimer, 500);
