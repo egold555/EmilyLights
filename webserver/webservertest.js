@@ -15,7 +15,7 @@ var OPC = require('./opc')
 var client = new OPC('192.168.1.122', 7890);
 
 var SceneClass = require('./scenes');
-var sceneRainbow = new SceneClass.SceneTest(client);
+var sceneRainbow = new SceneClass.SceneDots(client);
 
 http.createServer(function (req, res) {
     console.log(`${req.method} ${req.url}`);
