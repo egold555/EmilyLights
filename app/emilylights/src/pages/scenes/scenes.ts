@@ -18,7 +18,7 @@ export class ScenesPage {
   }
 
   refreshData() {
-    this.http.post(this.getURL("scenes.json", true)).subscribe(
+    this.http.post(this.getURL("scenes.json")).subscribe(
       data => {
         var dataRecieved = data._body; //._body ???
         //console.log(JSON.stringify(data));
@@ -34,13 +34,13 @@ export class ScenesPage {
     );
   }
 
-  getURL(file: string, cache: boolean) {
+  getURL(file: string) {
     return "http://192.168.1.56:8000/" + file;
   }
 
-  //  sendPost(prefix: string, data: string) {
-  //    this.http.post(this.getURL(prefix, false), data).subscribe();
-  //  }
+  sendPost(prefix: string, data: string) {
+    this.http.post(this.getURL(prefix), data).subscribe();
+  }
 
   toggleEdit() {
     this.editing = !this.editing;
@@ -55,11 +55,11 @@ export class ScenesPage {
     this.scenes = reorderArray(this.scenes, indexes);
   }
 
-  itemApply(item: string) {
-
+  itemApply(item: any) {
+    this.sendPost('setanimation/' + item.id)
   }
 
-  itemEdit(item: string) {
+  itemEdit(item: any) {
 
   }
 
