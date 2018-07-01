@@ -16,6 +16,8 @@ import { ColorPicker } from '../components/color-picker/color-picker';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { ColorPage } from '../pages/designer/designer';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -23,7 +25,8 @@ import { IonicStorageModule } from '@ionic/storage';
     SettingsPage,
     ScenesPage,
     TabsPage,
-    ColorPicker
+    ColorPicker,
+    ColorPage
   ],
   imports: [
     HttpModule,
@@ -37,7 +40,8 @@ import { IonicStorageModule } from '@ionic/storage';
     DesignerPage,
     SettingsPage,
     ScenesPage,
-    TabsPage
+    TabsPage,
+    ColorPage
   ],
   providers: [
     StatusBar,

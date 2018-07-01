@@ -1,5 +1,16 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+
+
+@Component({
+  templateUrl: 'color-page.html'
+})
+export class ColorPage {
+
+  constructor(params: NavParams) {
+
+  }
+}
 
 @Component({
   selector: 'page-designer',
@@ -26,7 +37,7 @@ export class DesignerPage {
   }
 
   openColorPage() {
-
+    this.navCtrl.push(ColorPage, {});
   }
 
 }

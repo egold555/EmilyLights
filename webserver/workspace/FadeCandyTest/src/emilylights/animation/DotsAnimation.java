@@ -1,7 +1,5 @@
 package emilylights.animation;
 
-import emilylights.opc.Animation;
-
 public class DotsAnimation extends Animation {
 
 	private float advance = 0.02f;

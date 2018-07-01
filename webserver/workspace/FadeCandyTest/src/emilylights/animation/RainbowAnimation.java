@@ -1,7 +1,5 @@
 package emilylights.animation;
 
-import emilylights.opc.Animation;
-
 public class RainbowAnimation extends Animation {
 
 	@Override

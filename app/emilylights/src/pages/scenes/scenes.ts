@@ -14,7 +14,7 @@ export class ScenesPage {
   editing: boolean = false;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: Http, public toastCtrl: ToastController) {
-    console.log(Constants.GlobalVariables._IP);
+    //console.log(Constants.GlobalVariables._IP);
   }
 
   refreshData() {
@@ -35,7 +35,7 @@ export class ScenesPage {
   }
 
   getURL(file: string, cache: boolean) {
-    return "http://192.168.1.122:8080/" + file + (cache ? "?iHateCaches=" + Math.random() : "");
+    return "http://192.168.1.56:8001/" + file + (cache ? "?iHateCaches=" + Math.random() : "");
   }
 
   //  sendPost(prefix: string, data: string) {

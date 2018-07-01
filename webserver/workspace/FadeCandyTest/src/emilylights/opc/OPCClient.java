@@ -3,6 +3,8 @@ package emilylights.opc;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import emilylights.animation.Animation;
+
 
 public class OPCClient implements AutoCloseable {
 

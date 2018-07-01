@@ -1,4 +1,4 @@
-package emilylights.opc;
+package emilylights.animation;
 
 import java.util.Random;
 
@@ -10,7 +10,7 @@ public abstract class Animation {
 	
 	protected static final int MAX_COLS = 11;
 	protected static final int MAX_ROWS = 9;
-	protected static final int PIXEL_COUNT = MAX_ROWS * MAX_COLS;
+	public static final int PIXEL_COUNT = MAX_ROWS * MAX_COLS;
 	
 	private byte[] pixels = null;
 
@@ -73,7 +73,7 @@ public abstract class Animation {
         }
         else {
             if (h >= 1)
-                h -= 1;
+                h = h % 1;
             h *= 6;         // sector 0 to 5
             i = (int)Math.floor(h);
             f = h - i;          // factorial part of h
