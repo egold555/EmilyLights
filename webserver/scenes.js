@@ -71,9 +71,12 @@ class SceneBase {
         return [r * 255, g * 255, b * 255];
     }
 
+    lerp(v0, v1, t) {
+        return v0 * (1 - t) + v1 * t
+    }
+
 }
 
-//TODO https://youtu.be/k_MiqGQ8rG0?t=2m11s
 class SceneDots extends SceneBase {
 
 
@@ -112,10 +115,6 @@ class SceneDots extends SceneBase {
         this.hue += this.hueAdvance;
 
         this.client.writePixels();
-    }
-
-    lerp(v0, v1, t) {
-        return v0 * (1 - t) + v1 * t
     }
 
 }
