@@ -35,7 +35,7 @@ export class ScenesPage {
   }
 
   getURL(file: string, cache: boolean) {
-    return "http://192.168.1.56:8001/" + file + (cache ? "?iHateCaches=" + Math.random() : "");
+    return "http://192.168.1.56:8000/" + file + (cache ? "?iHateCaches=" + Math.random() : "");
   }
 
   //  sendPost(prefix: string, data: string) {

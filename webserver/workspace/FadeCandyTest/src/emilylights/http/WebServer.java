@@ -1,8 +1,11 @@
 package emilylights.http;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -29,18 +32,13 @@ public class WebServer {
 
 			String response = getResponse(t.getRequestURI().toString().substring(1).split("/"));
 
-			//No need to return anything else besides 200 cause yeah
-			t.sendResponseHeaders(200, response.getBytes().length);
+			
 
 			//add all the flags n stuff
 			t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-			if (t.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
-				t.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, OPTIONS");
-				t.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type,Authorization");
-				t.sendResponseHeaders(204, -1);
-				return;
-			}
 
+			//No need to return anything else besides 200 cause yeah
+			t.sendResponseHeaders(200, response.getBytes().length);
 
 			OutputStream os = t.getResponseBody();
 			os.write(response.getBytes());
@@ -49,6 +47,20 @@ public class WebServer {
 	}
 
 	private String getResponse(String[] urlParts) {
+		
+		System.out.println("Request got: " + Arrays.toString(urlParts));
+		
+		try {
+			if(urlParts[0].startsWith("scenes.json")) {
+				return new String(Files.readAllBytes(new File("scenes.json").toPath()));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+
+		
 		return Arrays.toString(urlParts);
 	}
 

@@ -5,12 +5,13 @@ import java.util.Scanner;
 
 import emilylights.animation.Animation;
 import emilylights.animation.DotsAnimation;
+import emilylights.animation.RainbowAnimation;
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 
 public class Main {
 
-	private static final String IP = "127.0.0.1";
+	private static final String IP = "192.168.1.122";
 	private static int PORT = 7890;
 	
 	static Scanner s= new Scanner(System.in);
@@ -20,7 +21,7 @@ public class Main {
 		OPCClient opc = new OPCClient(IP, PORT);
 		WebServer webServer = new WebServer();
 
-		Animation animation = new DotsAnimation();
+		Animation animation = new RainbowAnimation();
 		
 		webServer.start();
 		
