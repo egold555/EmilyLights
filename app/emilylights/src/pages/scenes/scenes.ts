@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, reorderArray, AlertController, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
-import * as Constants from '../../components/Constants';
 
 @Component({
   selector: 'page-scenes',
@@ -14,11 +13,12 @@ export class ScenesPage {
   editing: boolean = false;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: Http, public toastCtrl: ToastController) {
-    //console.log(Constants.GlobalVariables._IP);
+    this.refreshData(null);
   }
 
-  refreshData() {
-    this.http.post(this.getURL("scenes.json")).subscribe(
+  refreshData(refresher) {
+
+    this.http.post(this.getURL("scenes.json"), 'data').subscribe(
       data => {
         var dataRecieved = data._body; //._body ???
         //console.log(JSON.stringify(data));
@@ -32,6 +32,12 @@ export class ScenesPage {
         this.showErrorMessage(JSON.stringify(err));
       }
     );
+
+    setTimeout(() => {
+      if (refresher != null) {
+        refresher.complete();
+      }
+    }, 2000);
   }
 
   getURL(file: string) {
@@ -56,7 +62,7 @@ export class ScenesPage {
   }
 
   itemApply(item: any) {
-    this.sendPost('setanimation/' + item.id)
+    this.sendPost('setanimation/' + item.id, '');
   }
 
   itemEdit(item: any) {
@@ -101,7 +107,7 @@ export class ScenesPage {
             console.log('Delete clicked');
             this.showToast(scene.name + " deleted.");
             //this.sendPost("scene_delete.txt", scene.name);
-            this.refreshData();
+            this.refreshData(null);
           }
         }
       ]

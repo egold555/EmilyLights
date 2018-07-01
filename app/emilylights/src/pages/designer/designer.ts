@@ -7,9 +7,25 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class ColorPage {
 
-  constructor(params: NavParams) {
+  colors: any[];
 
+  constructor(params: NavParams) {
+    this.colors = [
+
+      {
+        name: 'Test',
+        hex: '#a0d831',
+      },
+      {
+        name: 'Test #2',
+        hex: '#fc52db',
+      }
+
+    ];
   }
+
+
+
 }
 
 @Component({
