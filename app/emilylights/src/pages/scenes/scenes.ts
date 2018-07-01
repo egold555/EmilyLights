@@ -18,7 +18,7 @@ export class ScenesPage {
   }
 
   refreshData() {
-    this.http.get(this.getURL("scenes.json", true)).subscribe(
+    this.http.post(this.getURL("scenes.json", true)).subscribe(
       data => {
         var dataRecieved = data._body; //._body ???
         //console.log(JSON.stringify(data));
@@ -35,7 +35,7 @@ export class ScenesPage {
   }
 
   getURL(file: string, cache: boolean) {
-    return "http://192.168.1.56:8000/" + file + (cache ? "?iHateCaches=" + Math.random() : "");
+    return "http://192.168.1.56:8000/" + file;
   }
 
   //  sendPost(prefix: string, data: string) {

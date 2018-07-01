@@ -3,9 +3,7 @@ package emilylights;
 import java.io.IOException;
 import java.util.Scanner;
 
-import emilylights.animation.Animation;
-import emilylights.animation.DotsAnimation;
-import emilylights.animation.RainbowAnimation;
+import emilylights.animation.AnimationHandler;
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 
@@ -17,23 +15,23 @@ public class Main {
 	static Scanner s= new Scanner(System.in);
 	
 	public static void main(String[] args) throws InterruptedException, IOException {
-		
 		OPCClient opc = new OPCClient(IP, PORT);
-		WebServer webServer = new WebServer();
+		
 
-		Animation animation = new RainbowAnimation();
+		AnimationHandler animationHandler = new AnimationHandler();
+		WebServer webServer = new WebServer(animationHandler);
 		
 		webServer.start();
 		
 		System.out.println("Running animation..");
 		
 		while (System.in.available() == 0) {
-			opc.animate(animation);
+			opc.animate(animationHandler.getAnimation());
 			Thread.sleep(33);
 		}
 		
 		System.out.println("Exited.");
-		opc.clear(animation);
+		opc.clear(animationHandler.getAnimation());
 		opc.close();
 		//webServer.stop();
 	}

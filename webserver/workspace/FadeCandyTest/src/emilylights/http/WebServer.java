@@ -5,14 +5,21 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+import emilylights.animation.AnimationHandler;
+
 public class WebServer {
+
+	private AnimationHandler animationHandler;
+	
+	public WebServer(AnimationHandler animationHandler) {
+		this.animationHandler = animationHandler;
+	}
 
 	public void start() {
 		try {
@@ -45,14 +52,17 @@ public class WebServer {
 			os.close();
 		}
 	}
-
+	
 	private String getResponse(String[] urlParts) {
 		
 		System.out.println("Request got: " + Arrays.toString(urlParts));
 		
 		try {
-			if(urlParts[0].startsWith("scenes.json")) {
+			if(urlParts[0].equals("scenes.json")) {
 				return new String(Files.readAllBytes(new File("scenes.json").toPath()));
+			}
+			else if(urlParts[0].equals("setanimation")) {
+				animationHandler.setAnimation(Integer.parseInt(urlParts[1]));
 			}
 		}
 		catch (Exception e) {
@@ -63,5 +73,7 @@ public class WebServer {
 		
 		return Arrays.toString(urlParts);
 	}
+
+	
 
 }
