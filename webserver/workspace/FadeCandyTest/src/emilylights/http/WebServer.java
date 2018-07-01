@@ -59,7 +59,7 @@ public class WebServer {
 		
 		try {
 			if(urlParts[0].equals("scenes.json")) {
-				return new String(Files.readAllBytes(new File("scenes.json").toPath()));
+				return new String(Files.readAllBytes(new File("files\\scenes.json").toPath()));
 			}
 			else if(urlParts[0].equals("setanimation")) {
 				animationHandler.setAnimation(Integer.parseInt(urlParts[1]));

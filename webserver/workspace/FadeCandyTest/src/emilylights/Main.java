@@ -3,10 +3,13 @@ package emilylights;
 import java.io.IOException;
 import java.util.Scanner;
 
+import emilylights.animation.AnimatedImageAnimation;
 import emilylights.animation.AnimationHandler;
 import emilylights.animation.DotsAnimation;
+import emilylights.animation.DummyAnimation;
 import emilylights.animation.PongAnimation;
 import emilylights.animation.RainbowAnimation;
+import emilylights.animation.StaticImageAnimation;
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 
@@ -28,7 +31,8 @@ public class Main {
 		
 		System.out.println("Running animation..");
 		
-		animationHandler.setAnimation(new DotsAnimation());
+		animationHandler.setAnimation(new DummyAnimation());
+		
 		while (System.in.available() == 0) {
 			opc.animate(animationHandler.getAnimation());
 			Thread.sleep(33);

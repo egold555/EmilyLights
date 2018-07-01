@@ -12,9 +12,22 @@
     <p>Color: {{color}}</p>
     <color-picker [hexColor]="'#FF0000'" (colorChanged)="setColor($event)" (colorTouchStart)="colorTouchStart()" (colorTouchEnd)="colorTouchEnd()"></color-picker>
 -->
-
-    <button ion-item (click)="openColorPage()" icon-start><ion-icon name="brush" item-start></ion-icon>Select Colors</button>
-
+    <ion-item>
+        <ion-label fixed>Name</ion-label>
+        <ion-input id="id_name" type="text" [(ngModel)]="value_name"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Type</ion-label>
+        <ion-select [(ngModel)]="type">
+            <ion-option value="0">Dots</ion-option>
+            <ion-option value="1">Gradient</ion-option>
+        </ion-select>
+    </ion-item>
+    <!--    <ion-item>-->
+    <!--        <ion-icon name="brush" item-start></ion-icon>-->
+    <button ion-button full (click)="openColorPage()">Select Colors</button>
+    <button ion-button full (click)="openColorPage()">Select Colors</button>
+    <!--    </ion-item>-->
     <!--
     <ion-item>
         <ion-label>On Percent</ion-label>

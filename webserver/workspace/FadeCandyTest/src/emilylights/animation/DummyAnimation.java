@@ -1,12 +1,11 @@
 package emilylights.animation;
 
 public class DummyAnimation extends Animation{
-
+	
 	@Override
 	public void draw() {
-		setAllPixels(255, 0, 0);
-		fillCol(5, 0, 0, 255);
-		fillRow(5, 0, 255, 0);
+		int i = 224;
+		this.fillRect(0, 0, MAX_ROWS-1, MAX_COLS-1, i, i, i);
 	}
 
 }
