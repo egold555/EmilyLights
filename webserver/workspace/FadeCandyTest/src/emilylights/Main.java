@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import emilylights.animation.AnimationHandler;
+import emilylights.animation.DotsAnimation;
+import emilylights.animation.PongAnimation;
+import emilylights.animation.RainbowAnimation;
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 
@@ -25,6 +28,7 @@ public class Main {
 		
 		System.out.println("Running animation..");
 		
+		animationHandler.setAnimation(new DotsAnimation());
 		while (System.in.available() == 0) {
 			opc.animate(animationHandler.getAnimation());
 			Thread.sleep(33);
@@ -34,6 +38,9 @@ public class Main {
 		opc.clear(animationHandler.getAnimation());
 		opc.close();
 		//webServer.stop();
+		
+		System.exit(0);
+		
 	}
 	
 	

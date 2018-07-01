@@ -7,14 +7,18 @@ public class AnimationHandler {
 	
 	public void setAnimation(int an) {
 		if(an == 0) {
-			currentAnimation = new DotsAnimation();
+			setAnimation(new DotsAnimation());
 		}
 		else if(an == 1) {
-			currentAnimation = new RainbowAnimation();
+			setAnimation(new RainbowAnimation());
 		}
 		else {
-			currentAnimation = new DummyAnimation();
+			setAnimation(currentAnimation = new DummyAnimation());
 		}
+	}
+	
+	public void setAnimation(Animation animation) {
+		this.currentAnimation = animation;
 	}
 	
 	public Animation getAnimation() {

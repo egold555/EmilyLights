@@ -79,6 +79,7 @@ public class OPCClient implements AutoCloseable {
 	 */
 	public void animate(Animation animation) {
 		animation.reset();
+		animation.initInternal();
 		animation.draw();
 		show(animation);
 	}

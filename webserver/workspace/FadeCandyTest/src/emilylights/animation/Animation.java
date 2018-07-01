@@ -25,6 +25,18 @@ public abstract class Animation {
 	public final void setAllPixels(int red, int green, int blue) {
 		fillRect(0, 0, MAX_ROWS-1, MAX_COLS-1, red, green, blue);
 	}
+	
+	public final void setLineRow(int row, int start, int end, int red, int green, int blue) {
+        for (int col = start; col < end; col++) {
+            this.setPixel(row, col, red, green, blue);
+        }
+    }
+
+	public final void setLineCol(int col, int start, int end, int red, int green, int blue) {
+        for (int row = start; row < end; row++) {
+            this.setPixel(row, col, red, green, blue);
+        }
+    }
 
 	public final void fillRect(int firstRow, int firstCol, int lastRow, int lastCol, int red, int green, int blue) {
 		for(int row = firstRow; row <= lastRow; row++) {
@@ -57,6 +69,15 @@ public abstract class Animation {
 	}
 
 	public abstract void draw();
+	public void init() {};
+	
+	private boolean first = true;
+	public final void initInternal() {
+		if(first) {
+			init();
+			first = false;
+		}
+	}
 	
 	public final byte[] getPixels() {
 		return pixels;
