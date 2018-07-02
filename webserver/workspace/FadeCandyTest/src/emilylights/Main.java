@@ -31,7 +31,7 @@ public class Main {
 		
 		System.out.println("Running animation..");
 		
-		animationHandler.setAnimation(new DummyAnimation());
+		animationHandler.setAnimation(new RainbowAnimation());
 		
 		while (System.in.available() == 0) {
 			opc.animate(animationHandler.getAnimation());

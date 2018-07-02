@@ -4,8 +4,9 @@ public class DummyAnimation extends Animation{
 	
 	@Override
 	public void draw() {
-		int i = 224;
-		this.fillRect(0, 0, MAX_ROWS-1, MAX_COLS-1, i, i, i);
+		for(int i = 0; i < 7; i++) {
+			this.fillCol(i, 255, 255, 255);
+		}
 	}
 
 }
