@@ -72,6 +72,43 @@ public abstract class Animation {
 		pixels[offset+2] = (byte) blue;
 	}
 	
+
+	public final void addPixel(int row, int col, int red, int green, int blue) {
+		if (row < 0 || row >= MAX_ROWS || col < 0 || col >= MAX_COLS)
+			return;
+		addPixel(row + col * MAX_ROWS, red, green, blue);
+	}
+
+	public final void addPixel(int row, int col, int[] colors)
+	{
+		addPixel(row, col, colors[0], colors[1], colors[2]);
+	}
+	
+	public final void addPixel(int num, int red, int green, int blue) {
+		if (num < 0 || num >= PIXEL_COUNT) {
+			return;
+		}
+
+		int offset = num * 3;
+
+		red += (pixels[offset] & 0xFF);
+		if (red > 255) {
+			red = 255;
+		}
+		green += (pixels[offset + 1] & 0xFF);
+		if (green > 255) {
+			green = 255;
+		}
+		blue += (pixels[offset + 2] & 0xFF);
+		if (blue > 255) {
+			blue = 255;
+		}
+
+		pixels[offset] = (byte) red;
+		pixels[offset+1] = (byte) green;
+		pixels[offset+2] = (byte) blue;
+	}
+	
 	public final void reset()
 	{
 		if (pixels == null) {

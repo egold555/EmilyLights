@@ -14,7 +14,7 @@ import javax.swing.Timer;
 import emilylights.animation.*;
 
 public class AnimationTester extends JFrame {
-    private Animation animation = new RainAnimation();
+    private Animation animation = new CirclesAnimation();
     
 	private PixelPanel panel;
 	

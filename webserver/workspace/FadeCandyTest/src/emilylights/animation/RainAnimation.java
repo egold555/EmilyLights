@@ -80,6 +80,5 @@ public class RainAnimation extends Animation {
 	private class Drop {
 		public int column;
 		public int row;
-		public long startTime;
 	}
 }
