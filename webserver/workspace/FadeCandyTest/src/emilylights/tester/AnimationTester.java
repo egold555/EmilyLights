@@ -14,7 +14,7 @@ import javax.swing.Timer;
 import emilylights.animation.*;
 
 public class AnimationTester extends JFrame {
-    private Animation animation = new RainbowAnimation();
+    private Animation animation = new RainAnimation();
     
 	private PixelPanel panel;
 	
@@ -55,8 +55,8 @@ public class AnimationTester extends JFrame {
     
     class PixelPanel extends JPanel
     {
-    	private static final int ROWS = 9;
-    	private static final int COLS = 11;
+    	private static final int ROWS = Animation.MAX_ROWS;
+    	private static final int COLS = Animation.MAX_COLS;
     	
     	byte[] pixels;
     	

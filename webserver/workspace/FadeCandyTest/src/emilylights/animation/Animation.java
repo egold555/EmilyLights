@@ -6,10 +6,10 @@ public abstract class Animation {
 
 	protected static final Random RANDOM = new Random();
 	
-	private static long startTime = System.currentTimeMillis();
+	private long startTime = System.currentTimeMillis();
 	
-	protected static final int MAX_COLS = 11;
-	protected static final int MAX_ROWS = 9;
+	public static final int MAX_COLS = 11;
+	public static final int MAX_ROWS = 9;
 	public static final int PIXEL_COUNT = MAX_ROWS * MAX_COLS;
 	
 	private byte[] pixels = null;
@@ -47,10 +47,25 @@ public abstract class Animation {
 	}
 
 	public final void setPixel(int row, int col, int red, int green, int blue) {
+		if (row < 0 || row >= MAX_ROWS || col < 0 || col >= MAX_COLS)
+			return;
 		setPixel(row + col * MAX_ROWS, red, green, blue);
 	}
 	
+	public final void setPixel(int row, int col, int[] colors)
+	{
+		setPixel(row, col, colors[0], colors[1], colors[2]);
+	}
+	
+	public final void setPixel(int num, int[] colors) {
+		setPixel(num, colors[0], colors[1], colors[2]);
+	}
+	
 	public final void setPixel(int num, int red, int green, int blue) {
+		if (num < 0 || num >= PIXEL_COUNT) {
+			return;
+		}
+		
 		int offset = num * 3;
 		pixels[offset] = (byte) red;
 		pixels[offset+1] = (byte) green;
@@ -83,7 +98,7 @@ public abstract class Animation {
 		return pixels;
 	}
 	
-	public final  int[] hsvToRgb(float h, float s, float v)
+	public final int[] hsvToRgb(float h, float s, float v)
     {
         int i;
         float f, p, q, t;
