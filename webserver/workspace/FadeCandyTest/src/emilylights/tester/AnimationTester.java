@@ -1,25 +1,23 @@
 package emilylights.tester;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import emilylights.animation.*;
+import emilylights.animation.Animation;
 
 public class AnimationTester extends JFrame {
-    private Animation animation = new CirclesAnimation();
+  
+	private static final long serialVersionUID = -273960672007366769L;
+
+	private Animation animation;
     
 	private PixelPanel panel;
 	
-    public AnimationTester() {
-
+    public AnimationTester(Animation animation) {
+    	this.animation = animation;
         initUI();
     }
 
@@ -46,55 +44,10 @@ public class AnimationTester extends JFrame {
 
     public static void main(String[] args) {
 
-        EventQueue.invokeLater(() -> {
-        	AnimationTester ex = new AnimationTester();
-            ex.setVisible(true);
-        });
+       
 
     }
     
-    class PixelPanel extends JPanel
-    {
-    	private static final int ROWS = Animation.MAX_ROWS;
-    	private static final int COLS = Animation.MAX_COLS;
-    	
-    	byte[] pixels;
-    	
-    	@Override
-    	public void paintComponent(Graphics g)
-    	{
-    	    int width = getWidth();
-    	    int height = getHeight();
 
-    	    g.setColor(Color.black);
-    	    g.fillRect(0,  0, width,  height);
-
-    	    if (pixels != null) {
-	    	    for (int row = 0; row < ROWS; ++row) {
-	    	    	for (int col = 0; col < COLS; ++col) {
-	    	    		int offset  = (row + col * ROWS) * 3;
-	    	    		drawLight(g, row, col, new Color(pixels[offset] & 0xFF, pixels[offset + 1] & 0xFF, pixels[offset + 2] & 0xFF));
-	    	    	}
-	    	    }
-    	    }
-    	}
-    	
-    	private void drawLight(Graphics g, int row, int col, Color color)
-    	{
-    	    int width = getWidth();
-    	    int height = getHeight();
-    	    int lightSpacingWidth = width / (COLS + 1);
-    	    int lightSpacingHeight = height / (ROWS + 1);
-    	    
-    	    g.setColor(color);
-    	    g.fillOval((1 + col) * lightSpacingWidth, (1 + row) * lightSpacingHeight, lightSpacingWidth / 5, lightSpacingHeight / 5);
-    	}
-    	
-    	public void updateFromAnimation(Animation animation)
-    	{
-    		pixels = animation.getPixels();
-    		repaint();
-    	}
-    }
 }
 
