@@ -108,7 +108,62 @@ public abstract class Animation {
 		pixels[offset+1] = (byte) green;
 		pixels[offset+2] = (byte) blue;
 	}
+
+	public final void addPixelAntiAlias(double row, double col, int red, int green, int blue) {
+		if (row <= -1 || row >= MAX_ROWS || col <= -1 || col >= MAX_COLS)
+			return;
+		
+		int row1 = (int) Math.round(row);
+		int col1 = (int) Math.round(col);
+		int row2, col2;
+		double rowFrac1, rowFrac2, colFrac1, colFrac2;
+		double rowFrac = row - row1;
+		double colFrac = col - col1;
+
+		if (rowFrac == 0 && colFrac == 0) {
+			addPixel((int) row, (int) col, red, green, blue);
+			return;
+		}
+		
+		if (rowFrac <= 0) {
+			row2 = row1 - 1;
+			rowFrac2 = -rowFrac;
+			rowFrac1 = 1 - rowFrac2;
+		}
+		else {
+			row2 = row1 + 1;
+			rowFrac2 = rowFrac;
+			rowFrac1 = 1 - rowFrac2;
+		}
+		
+		if (colFrac <= 0) {
+			col2 = col1 - 1;
+			colFrac2 = -colFrac;
+			colFrac1 = 1 - colFrac2;
+		}
+		else {
+			col2 = col1 + 1;
+			colFrac2 = colFrac;
+			colFrac1 = 1 - colFrac2;
+		}
+		
+		double r1c1Frac = rowFrac1 * colFrac1;
+		double r1c2Frac = rowFrac1 * colFrac2;
+		double r2c1Frac = rowFrac2 * colFrac1;
+		double r2c2Frac = rowFrac2 * colFrac2;
+		
+		addPixel(row1, col1, (int) Math.round(red * r1c1Frac), (int) Math.round(green * r1c1Frac), (int) Math.round(blue * r1c1Frac));
+		addPixel(row1, col2, (int) Math.round(red * r1c2Frac), (int) Math.round(green * r1c2Frac), (int) Math.round(blue * r1c2Frac));
+		addPixel(row2, col1, (int) Math.round(red * r2c1Frac), (int) Math.round(green * r2c1Frac), (int) Math.round(blue * r2c1Frac));
+		addPixel(row2, col2, (int) Math.round(red * r2c2Frac), (int) Math.round(green * r2c2Frac), (int) Math.round(blue * r2c2Frac));
+	}
+
+	public final void addPixelAntiAlias(double row, double col, int[] colors)
+	{
+		addPixelAntiAlias(row, col, colors[0], colors[1], colors[2]);
+	}
 	
+
 	public final void reset()
 	{
 		if(first) {
