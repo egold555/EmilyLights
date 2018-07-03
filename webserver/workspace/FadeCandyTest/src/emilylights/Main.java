@@ -3,9 +3,9 @@ package emilylights;
 import java.awt.EventQueue;
 import java.io.IOException;
 
-import emilylights.animation.Animation;
 import emilylights.animation.AnimationHandler;
 import emilylights.animation.CirclesAnimation;
+import emilylights.animation.StaticImageAnimation;
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 import emilylights.tester.AnimationTester;
@@ -17,7 +17,7 @@ public class Main {
 	
 	public static AnimationHandler animationHandler = new AnimationHandler();
 
-	private static final boolean ENABLE_WEB_SERVER = false;
+	private static final boolean ENABLE_WEB_SERVER = true;
 	private static final boolean ENABLE_LIGHT_WALL = true;
 	private static final boolean ENABLE_TESTER = true;
 
@@ -26,7 +26,7 @@ public class Main {
 		OPCClient opc = new OPCClient(IP, PORT);
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
-		animationHandler.setAnimation(new CirclesAnimation());
+		animationHandler.setAnimation(new StaticImageAnimation("cat"));
 
 
 
