@@ -29,8 +29,13 @@ public class Main {
 		WebServer webServer = new WebServer(animationHandler);
 		animationHandler.setAnimation(CURRENT_ANIMATION);
 
+		
+		log("WEB_SERVER: " + ENABLE_WEB_SERVER);
+		log("LIGHT_WALL: " + ENABLE_LIGHT_WALL);
+		log("TESTER: " + ENABLE_TESTER);
+		log("");
+		
 		if(ENABLE_TESTER) {
-			log("Tester started.");
 			EventQueue.invokeLater(() -> {
 				AnimationTester ex = new AnimationTester(animationHandler.getAnimation());
 				ex.setVisible(true);
@@ -39,11 +44,6 @@ public class Main {
 
 		if(ENABLE_WEB_SERVER) {
 			webServer.start();
-			log("Web-Server started.");
-		}
-
-		if(ENABLE_LIGHT_WALL) {
-			log("Light-Wall started.");
 		}
 
 		log("Running animation..");
