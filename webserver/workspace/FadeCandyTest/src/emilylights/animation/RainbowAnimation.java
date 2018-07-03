@@ -3,7 +3,7 @@ package emilylights.animation;
 public class RainbowAnimation extends Animation {
 	public enum Direction {LEFT, RIGHT, TOP, BOTTOM, LEFT_TOP, LEFT_BOTTOM, RIGHT_TOP, RIGHT_BOTTOM, DIAMOND_IN, DIAMOND_OUT, SQUARE_IN, SQUARE_OUT, CIRCLE_IN, CIRCLE_OUT, SOLID};
 	
-	public Direction direction = Direction.TOP;
+	public Direction direction = Direction.DIAMOND_OUT;
 	public double speed = 2; // higher numbers = faster motion
 	public double smoothness = 1.5; // higher numbers = colors change more slowly/smoothly.
 

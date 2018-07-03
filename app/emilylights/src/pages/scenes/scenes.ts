@@ -18,7 +18,7 @@ export class ScenesPage {
 
   refreshData(refresher) {
 
-    this.http.post(this.getURL("scenes.json"), 'data').subscribe(
+    this.http.post(this.getURL("scenes.json"), '').subscribe(
       data => {
         var dataRecieved = data._body; //._body ???
         //console.log(JSON.stringify(data));
@@ -62,7 +62,7 @@ export class ScenesPage {
   }
 
   itemApply(item: any) {
-    this.sendPost('setanimation/' + item.id, '');
+    this.sendPost('setanimation/' + item.id, '{"type":2,"colors":[{"red":255,"green":255,"blue":0},{"red":255,"green":255,"blue":255},{"red":0,"green":0,"blue":255}],"options":{"speed":"1","direction":"TOP"}}');
   }
 
   itemEdit(item: any) {
