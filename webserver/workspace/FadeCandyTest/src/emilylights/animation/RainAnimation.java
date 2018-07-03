@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RainAnimation extends Animation {
-	private float hue = 0;
-	private float saturation = 0;
 	
 	private static final int DROP_LEN = 7;
 	private static final float DROP_VALUESTART = 0.6F;
@@ -28,10 +26,10 @@ public class RainAnimation extends Animation {
 	private void drawDrops()
 	{
 		for (Drop drop: drops) {
-			int[] colors = this.hsvToRgb(hue, saturation, 1);
+			int[] colors = this.hsvToRgb(drop.hue, drop.saturation, 1);
 			addPixelAntiAlias(drop.row, drop.column, colors);
 			for (int i = 1; i <= DROP_LEN; ++i) {
-				int[] c = this.hsvToRgb(hue, saturation, (float) lerp(DROP_VALUESTART, 0, (float) i / DROP_LEN));
+				int[] c = this.hsvToRgb(drop.hue, drop.saturation, (float) lerp(DROP_VALUESTART, 0, (float) i / DROP_LEN));
 				if (drop.row- i >= -1) {
 					addPixelAntiAlias(drop.row - i, drop.column, c);
 				}
@@ -78,5 +76,7 @@ public class RainAnimation extends Animation {
 	private class Drop {
 		public double column;
 		public double row;
+		public float saturation = RANDOM.nextFloat();
+		public float hue = randomFloatRange(0.5f, 0.6f);
 	}
 }

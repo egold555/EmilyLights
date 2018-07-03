@@ -259,5 +259,9 @@ public abstract class Animation {
     {
     	return (double)(System.currentTimeMillis() - startTime) / 1000.0;
     }
+    
+    public final float randomFloatRange(float min, float max) {
+    	return min + RANDOM.nextFloat() * (max - min);
+    }
 
 }
