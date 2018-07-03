@@ -14,30 +14,30 @@ public class Main {
 
 	private static final String IP = "192.168.1.122";
 	private static int PORT = 7890;
+	
+	public static AnimationHandler animationHandler = new AnimationHandler();
 
 	private static final boolean ENABLE_WEB_SERVER = false;
 	private static final boolean ENABLE_LIGHT_WALL = true;
 	private static final boolean ENABLE_TESTER = true;
-	
-	public static AnimationHandler animationHandler = new AnimationHandler();
-	
-	private static Animation CURRENT_ANIMATION = new CirclesAnimation();
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		
-		OPCClient opc = new OPCClient(IP, PORT);
-		WebServer webServer = new WebServer(animationHandler);
-		animationHandler.setAnimation(CURRENT_ANIMATION);
 
-		
+		OPCClient opc = new OPCClient(IP, PORT);
+		AnimationTester ex = new AnimationTester();
+		WebServer webServer = new WebServer(animationHandler);
+		animationHandler.setAnimation(new CirclesAnimation());
+
+
+
+
 		log("WEB_SERVER: " + ENABLE_WEB_SERVER);
 		log("LIGHT_WALL: " + ENABLE_LIGHT_WALL);
 		log("TESTER: " + ENABLE_TESTER);
 		log("");
-		
+
 		if(ENABLE_TESTER) {
 			EventQueue.invokeLater(() -> {
-				AnimationTester ex = new AnimationTester(animationHandler.getAnimation());
 				ex.setVisible(true);
 			});
 		}
@@ -51,6 +51,9 @@ public class Main {
 		while (System.in.available() == 0) {
 			if(ENABLE_LIGHT_WALL) {
 				opc.animate(animationHandler.getAnimation());
+			}
+			if(ENABLE_TESTER) {
+				ex.panel.updateFromAnimation(animationHandler.getAnimation());
 			}
 			Thread.sleep(33);
 		}

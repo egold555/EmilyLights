@@ -111,6 +111,11 @@ public abstract class Animation {
 	
 	public final void reset()
 	{
+		if(first) {
+			init();
+			first = false;
+		}
+		
 		if (pixels == null) {
 			pixels = new byte[3 * PIXEL_COUNT];
 		}
@@ -124,12 +129,6 @@ public abstract class Animation {
 	public void init() {};
 	
 	private boolean first = true;
-	public final void initInternal() {
-		if(first) {
-			init();
-			first = false;
-		}
-	}
 	
 	public final byte[] getPixels() {
 		return pixels;

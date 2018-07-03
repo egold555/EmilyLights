@@ -1,23 +1,14 @@
 package emilylights.tester;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
-import javax.swing.Timer;
-
-import emilylights.animation.Animation;
 
 public class AnimationTester extends JFrame {
   
 	private static final long serialVersionUID = -273960672007366769L;
-
-	private Animation animation;
     
-	private PixelPanel panel;
+	public PixelPanel panel;
 	
-    public AnimationTester(Animation animation) {
-    	this.animation = animation;
+    public AnimationTester() {
         initUI();
     }
 
@@ -30,24 +21,7 @@ public class AnimationTester extends JFrame {
         
         panel = new PixelPanel();
         this.add(panel);
-        
-        Timer timer = new Timer(33, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				animation.reset();
-				animation.draw();
-				panel.updateFromAnimation(animation);
-			}
-        });
-        timer.start();
     }
-
-    public static void main(String[] args) {
-
-       
-
-    }
-    
 
 }
 
