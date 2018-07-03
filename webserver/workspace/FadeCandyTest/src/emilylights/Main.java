@@ -25,7 +25,7 @@ public class Main {
 		OPCClient opc = new OPCClient(IP, PORT);
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
-		animationHandler.setAnimation(new RainbowAnimation());
+		animationHandler.setAnimation(new RainAnimation());
 
 
 
