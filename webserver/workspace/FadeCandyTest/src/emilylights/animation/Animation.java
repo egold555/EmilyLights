@@ -144,8 +144,10 @@ public abstract class Animation {
             r = g = b = v;
         }
         else {
-            if (h >= 1)
+            if (h >= 1 || h <= -1)
                 h = h % 1;
+            if (h < 0)
+            	h += 1;
             h *= 6;         // sector 0 to 5
             i = (int)Math.floor(h);
             f = h - i;          // factorial part of h

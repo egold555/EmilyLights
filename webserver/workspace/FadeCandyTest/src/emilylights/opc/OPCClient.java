@@ -75,11 +75,9 @@ public class OPCClient implements AutoCloseable {
 
 
 	/**
-	 * Run one frame of an animation and send it to the OPC server.
+	 * Send animation to the OPC server.
 	 */
 	public void animate(Animation animation) {
-		animation.reset();
-		animation.draw();
 		show(animation);
 	}
 
