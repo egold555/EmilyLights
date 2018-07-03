@@ -3,9 +3,8 @@ package emilylights;
 import java.awt.EventQueue;
 import java.io.IOException;
 
-import emilylights.animation.AnimationHandler;
-import emilylights.animation.CirclesAnimation;
-import emilylights.animation.StaticImageAnimation;
+
+import emilylights.animation.*;
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 import emilylights.tester.AnimationTester;
@@ -26,7 +25,7 @@ public class Main {
 		OPCClient opc = new OPCClient(IP, PORT);
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
-		animationHandler.setAnimation(new StaticImageAnimation("cat"));
+		animationHandler.setAnimation(new RainbowAnimation());
 
 
 
@@ -49,11 +48,15 @@ public class Main {
 		log("Running animation..");
 		log("Press ENTER to exit.");
 		while (System.in.available() == 0) {
+			Animation animation = animationHandler.getAnimation();
+			animation.reset();
+			animation.draw();
+			
 			if(ENABLE_LIGHT_WALL) {
-				opc.animate(animationHandler.getAnimation());
+				opc.animate(animation);
 			}
 			if(ENABLE_TESTER) {
-				ex.panel.updateFromAnimation(animationHandler.getAnimation());
+				ex.panel.updateFromAnimation(animation);
 			}
 			Thread.sleep(33);
 		}
