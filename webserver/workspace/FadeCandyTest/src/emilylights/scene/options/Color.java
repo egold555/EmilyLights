@@ -1,4 +1,4 @@
-package emilylights.animation.options;
+package emilylights.scene.options;
 
 public class Color {
 

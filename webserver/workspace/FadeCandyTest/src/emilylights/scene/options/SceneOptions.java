@@ -1,9 +1,9 @@
-package emilylights.animation.options;
+package emilylights.scene.options;
 
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class AnimationOptions {
+public class SceneOptions {
 
 	public int type;
 	public Color[] colors;
