@@ -1,9 +1,9 @@
-package emilylights.animation;
+package emilylights.scene;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RainAnimation extends Animation {
+public class SceneRaindrops extends Scene {
 	
 	private static final int DROP_LEN = 7;
 	private static final float DROP_VALUESTART = 0.6F;

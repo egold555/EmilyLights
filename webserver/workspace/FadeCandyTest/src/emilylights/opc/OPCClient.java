@@ -3,7 +3,7 @@ package emilylights.opc;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import emilylights.animation.Animation;
+import emilylights.scene.Scene;
 
 
 public class OPCClient implements AutoCloseable {
@@ -77,11 +77,11 @@ public class OPCClient implements AutoCloseable {
 	/**
 	 * Send animation to the OPC server.
 	 */
-	public void animate(Animation animation) {
+	public void animate(Scene animation) {
 		show(animation);
 	}
 
-	public void clear(Animation animation) {
+	public void clear(Scene animation) {
 		animation.reset();
 		show(animation);
 	}
@@ -91,8 +91,8 @@ public class OPCClient implements AutoCloseable {
 	/**
 	 * Push all pixel changes to the strip.
 	 */
-	public void show(Animation animation) {
-		int numPixels = Animation.PIXEL_COUNT;
+	public void show(Scene animation) {
+		int numPixels = Scene.PIXEL_COUNT;
 		int numBytes = 3 * numPixels;
 		int headerLen = 4;
 		if (packetHeader == null || packetHeader.length != headerLen) {

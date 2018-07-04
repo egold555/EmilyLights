@@ -1,4 +1,4 @@
-package emilylights.animation;
+package emilylights.scene;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class AnimatedImageAnimation extends Animation{
+public class SceneAnimatedImage extends Scene{
 
 	List<BufferedImage> img = new ArrayList<BufferedImage>();
 	
@@ -16,7 +16,7 @@ public class AnimatedImageAnimation extends Animation{
 	double startTime = getTime();
 	private final double frameTime;
 	
-	public AnimatedImageAnimation(String[] image, double frameTime) throws IOException {
+	public SceneAnimatedImage(String[] image, double frameTime) throws IOException {
 		this.frameTime = frameTime;
 		for(int i = 0; i < image.length; i++) {
 			img.add(ImageIO.read(new File("files\\" + image[i] + ".png")));

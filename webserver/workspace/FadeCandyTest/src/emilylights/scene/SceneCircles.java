@@ -1,9 +1,9 @@
-package emilylights.animation;
+package emilylights.scene;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CirclesAnimation extends Animation {
+public class SceneCircles extends Scene {
 	private static final double WIDTH = 1.1F;
 	private static final double SPEED = 0.07F;
 	private static final double DROP_MIN_TIME = 2.5;

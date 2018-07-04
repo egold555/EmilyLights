@@ -5,14 +5,14 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import emilylights.animation.Animation;
+import emilylights.scene.Scene;
 
 public class PixelPanel extends JPanel{
 
 	private static final long serialVersionUID = -2167633649304409566L;
 	
-	private static final int ROWS = Animation.MAX_ROWS;
-	private static final int COLS = Animation.MAX_COLS;
+	private static final int ROWS = Scene.MAX_ROWS;
+	private static final int COLS = Scene.MAX_COLS;
 
 	byte[] pixels;
 
@@ -46,7 +46,7 @@ public class PixelPanel extends JPanel{
 		g.fillOval((1 + col) * lightSpacingWidth, (1 + row) * lightSpacingHeight, lightSpacingWidth / 5, lightSpacingHeight / 5);
 	}
 
-	public void updateFromAnimation(Animation animation)
+	public void updateFromAnimation(Scene animation)
 	{
 		pixels = animation.getPixels();
 		repaint();

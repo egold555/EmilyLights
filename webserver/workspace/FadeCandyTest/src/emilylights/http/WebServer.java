@@ -18,15 +18,15 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
-import emilylights.animation.AnimationHandler;
-import emilylights.animation.options.AnimationOptions;
-import emilylights.animation.options.Color;
+import emilylights.scene.SceneHandler;
+import emilylights.scene.options.SceneOptions;
+import emilylights.scene.options.Color;
 
 public class WebServer {
 
-	private AnimationHandler animationHandler;
+	private SceneHandler animationHandler;
 
-	public WebServer(AnimationHandler animationHandler) {
+	public WebServer(SceneHandler animationHandler) {
 		this.animationHandler = animationHandler;
 	}
 
@@ -75,7 +75,7 @@ public class WebServer {
 
 		Gson gson = new GsonBuilder().create();
 
-		AnimationOptions src = new AnimationOptions();
+		SceneOptions src = new SceneOptions();
 
 		src.type = 2;
 		src.colors = new Color[] {new Color(255, 255, 0), new Color(255, 255, 255), new Color(0, 0, 255)};
@@ -87,7 +87,7 @@ public class WebServer {
 		src.options = options;
 		System.out.println(gson.toJson(src));
 
-		AnimationOptions optns = gson.fromJson(in, AnimationOptions.class);
+		SceneOptions optns = gson.fromJson(in, SceneOptions.class);
 		System.out.println(optns.toString());
 	}
 

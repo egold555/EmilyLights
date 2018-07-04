@@ -1,6 +1,6 @@
-package emilylights.animation;
+package emilylights.scene;
 
-public class PongAnimation extends Animation {
+public class ScenePong extends Scene {
 
 	int paddle1Y = 0, paddle1Direction = 1;
 	int paddle2Y = 0, paddle2Direction = 1;

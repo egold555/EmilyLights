@@ -2,11 +2,16 @@ package emilylights;
 
 import java.awt.EventQueue;
 import java.io.IOException;
+import java.util.Arrays;
 
-
-import emilylights.animation.*;
+import emilylights.audio.Audio;
+import emilylights.audio.AudioPropertiers;
+import emilylights.audio.AudioUtils;
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
+import emilylights.scene.Scene;
+import emilylights.scene.SceneHandler;
+import emilylights.scene.SceneMusicGraph;
 import emilylights.tester.AnimationTester;
 
 public class Main {
@@ -14,21 +19,33 @@ public class Main {
 	private static final String IP = "192.168.1.122";
 	private static int PORT = 7890;
 	
-	public static AnimationHandler animationHandler = new AnimationHandler();
+	public static SceneHandler animationHandler = new SceneHandler();
 
 	private static final boolean ENABLE_WEB_SERVER = true;
 	private static final boolean ENABLE_LIGHT_WALL = true;
 	private static final boolean ENABLE_TESTER = true;
-
+	
+	public static AudioPropertiers audioPropertiers = new AudioPropertiers();
+	public static Audio audio = new Audio();;
+	
 	public static void main(String[] args) throws InterruptedException, IOException {
 
 		OPCClient opc = new OPCClient(IP, PORT);
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
-		animationHandler.setAnimation(new RainAnimation());
-
-
-
+		animationHandler.setAnimation(new SceneMusicGraph());
+		
+		
+		String[] audioSources = AudioUtils.getAudioSources(audio);
+		System.out.println(Arrays.toString(audioSources)); //1 = primary microphone
+		
+		audioPropertiers.fft_binns = (int)(1.5f * Math.max(11, 9));
+        audioPropertiers.fft = new float[audioPropertiers.fft_binns];
+		
+		audio.SetAudioFormat();
+		audio.Set_and_Start_Mixer(1);
+		
+		audioPropertiers.gain = 35;
 
 		log("WEB_SERVER: " + ENABLE_WEB_SERVER);
 		log("LIGHT_WALL: " + ENABLE_LIGHT_WALL);
@@ -48,7 +65,7 @@ public class Main {
 		log("Running animation..");
 		log("Press ENTER to exit.");
 		while (System.in.available() == 0) {
-			Animation animation = animationHandler.getAnimation();
+			Scene animation = animationHandler.getAnimation();
 			animation.reset();
 			animation.draw();
 			
@@ -58,6 +75,7 @@ public class Main {
 			if(ENABLE_TESTER) {
 				ex.panel.updateFromAnimation(animation);
 			}
+			
 			Thread.sleep(33);
 		}
 

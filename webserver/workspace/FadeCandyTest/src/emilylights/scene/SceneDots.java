@@ -1,6 +1,6 @@
-package emilylights.animation;
+package emilylights.scene;
 
-public class DotsAnimation extends Animation {
+public class SceneDots extends Scene {
 
 	private float advance = 0.02f;
 	private float hue = 0f;
@@ -8,7 +8,7 @@ public class DotsAnimation extends Animation {
 	
 	private DotData[] dotArray = new DotData[PIXEL_COUNT];
 	
-	public DotsAnimation() {
+	public SceneDots() {
 		for(int i = 0; i < PIXEL_COUNT; i++) {
 			dotArray[i] = new DotData();
 		}
