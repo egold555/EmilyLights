@@ -19,7 +19,7 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import emilylights.scene.SceneHandler;
-import emilylights.scene.options.SceneOptions;
+import emilylights.scene.options.SceneDescriptor;
 import emilylights.scene.options.Color;
 
 public class WebServer {
@@ -75,19 +75,19 @@ public class WebServer {
 
 		Gson gson = new GsonBuilder().create();
 
-		SceneOptions src = new SceneOptions();
+//		SceneOptions src = new SceneOptions();
+//
+//		src.type = 2;
+//		src.colors = new Color[] {new Color(255, 255, 0), new Color(255, 255, 255), new Color(0, 0, 255)};
+//
+//		HashMap<String, String> options = new HashMap<String, String>();
+//		options.put("speed", "1");
+//		options.put("direction", "TOP");
+//
+//		src.options = options;
+//		System.out.println(gson.toJson(src));
 
-		src.type = 2;
-		src.colors = new Color[] {new Color(255, 255, 0), new Color(255, 255, 255), new Color(0, 0, 255)};
-
-		HashMap<String, String> options = new HashMap<String, String>();
-		options.put("speed", "1");
-		options.put("direction", "TOP");
-
-		src.options = options;
-		System.out.println(gson.toJson(src));
-
-		SceneOptions optns = gson.fromJson(in, SceneOptions.class);
+		SceneDescriptor optns = gson.fromJson(in, SceneDescriptor.class);
 		System.out.println(optns.toString());
 	}
 

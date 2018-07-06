@@ -62,7 +62,7 @@ export class ScenesPage {
   }
 
   itemApply(item: any) {
-    this.sendPost('setanimation/' + item.id, '{"type":2,"colors":[{"red":255,"green":255,"blue":0},{"red":255,"green":255,"blue":255},{"red":0,"green":0,"blue":255}],"options":{"speed":"1","direction":"TOP"}}');
+    this.sendPost('setanimation/' + item.id);
   }
 
   itemEdit(item: any) {

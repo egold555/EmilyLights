@@ -1,0 +1,32 @@
+[  
+   {  
+      "name":"Cool scene",
+      "type":0,
+      "id":0,
+      "img":"base64:coolstuAIDJFHALSDIJFLISDJFHA"
+   },
+   {  
+      "name":"Awesome scene",
+      "type":3,
+      "id":1,
+      "img":"base64:coolstuAIDJFHALSDIJFLISDJFHA",
+      "options":{  
+         "colors":[  
+            {  
+               "red":255,
+               "green":255,
+               "blue":255
+            },
+            {  
+               "red":-1,
+               "green":-1,
+               "blue":-1
+            }
+         ],
+         "customOptions":{  
+            "speed":0.5,
+            "direction":"CIRCLE_IN"
+         }
+      }
+   }
+]

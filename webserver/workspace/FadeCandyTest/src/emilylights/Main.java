@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.Arrays;
 
+import com.sun.imageio.spi.RAFImageInputStreamSpi;
+
 import emilylights.audio.Audio;
 import emilylights.audio.AudioPropertiers;
 import emilylights.audio.AudioUtils;
@@ -12,6 +14,8 @@ import emilylights.opc.OPCClient;
 import emilylights.scene.Scene;
 import emilylights.scene.SceneHandler;
 import emilylights.scene.SceneMusicGraph;
+import emilylights.scene.SceneRainbow;
+import emilylights.scene.SceneRainbow.Direction;
 import emilylights.tester.AnimationTester;
 
 public class Main {
@@ -33,17 +37,17 @@ public class Main {
 		OPCClient opc = new OPCClient(IP, PORT);
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
-		animationHandler.setAnimation(new SceneMusicGraph());
+		animationHandler.setAnimation(0);
 		
 		
 		String[] audioSources = AudioUtils.getAudioSources(audio);
-		System.out.println(Arrays.toString(audioSources)); //1 = primary microphone
+		System.out.println(Arrays.toString(audioSources));
 		
 		audioPropertiers.fft_binns = (int)(1.5f * Math.max(11, 9));
         audioPropertiers.fft = new float[audioPropertiers.fft_binns];
 		
 		audio.SetAudioFormat();
-		audio.Set_and_Start_Mixer(1);
+		audio.Set_and_Start_Mixer(1); //1 = primary microphone
 		
 		audioPropertiers.gain = 35;
 
@@ -61,6 +65,8 @@ public class Main {
 		if(ENABLE_WEB_SERVER) {
 			webServer.start();
 		}
+		
+		animationHandler.reloadJSON();
 
 		log("Running animation..");
 		log("Press ENTER to exit.");

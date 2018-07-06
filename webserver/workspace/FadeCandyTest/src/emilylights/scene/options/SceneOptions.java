@@ -2,17 +2,17 @@ package emilylights.scene.options;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 public class SceneOptions {
-
-	public int type;
+	
 	public Color[] colors;
-	public HashMap<String, String> options = new HashMap<String, String>();
+	public Map<String, Object> customOptions = new HashMap<String, Object>();
+	
+	
 	@Override
 	public String toString() {
-		return "AnimationOptions [type=" + type + ", colors=" + Arrays.toString(colors) + ", options=" + options + "]";
+		return "SceneOptions [colors=" + Arrays.toString(colors) + ", customOptions=" + customOptions + "]";
 	}
-	
-	
 	
 }

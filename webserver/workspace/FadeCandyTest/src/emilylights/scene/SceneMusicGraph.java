@@ -18,6 +18,8 @@ public class SceneMusicGraph extends Scene {
 			test/= 10;
 
 			test = 9 - test;
+			
+			System.out.println("Audio: " + test);
 
 			int[] color = hsvToRgb((float)bar/11, 1, 1);
 			

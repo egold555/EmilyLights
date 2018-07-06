@@ -2,6 +2,8 @@ package emilylights.scene;
 
 import java.util.Random;
 
+import emilylights.scene.options.SceneOptions;
+
 public abstract class Scene {
 
 	protected static final Random RANDOM = new Random();
@@ -189,6 +191,8 @@ public abstract class Scene {
 
 	public abstract void draw();
 	public void init() {};
+	
+	public void setOptions(SceneOptions options) { }
 
 	private boolean first = true;
 
