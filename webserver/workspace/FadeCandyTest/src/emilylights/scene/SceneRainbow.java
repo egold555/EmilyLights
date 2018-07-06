@@ -1,40 +1,47 @@
 package emilylights.scene;
 
+import emilylights.scene.options.SceneOptions;
+
 public class SceneRainbow extends Scene {
 	public enum Direction {LEFT, RIGHT, TOP, BOTTOM, LEFT_TOP, LEFT_BOTTOM, RIGHT_TOP, RIGHT_BOTTOM, DIAMOND_IN, DIAMOND_OUT, SQUARE_IN, SQUARE_OUT, CIRCLE_IN, CIRCLE_OUT, SOLID};
-	
-	public Direction direction = Direction.CIRCLE_OUT;
+
+	public Direction direction = Direction.LEFT;
 	public double speed = 0.5; // higher numbers = faster motion
 	public double smoothness = 2.0; // higher numbers = colors change more slowly/smoothly.
-	
-	public SceneRainbow() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public SceneRainbow(Direction d) {
-		this.direction = d;
+
+	@Override
+	public void setOptions(SceneOptions options) {
+		if(options.customOptions.containsKey("direction")) {
+			this.direction = Direction.valueOf((String) options.customOptions.get("direction"));
+		}
+		if(options.customOptions.containsKey("speed")) {
+			this.speed = (double) options.customOptions.get("speed");
+		}
+		if(options.customOptions.containsKey("smoothness")) {
+			this.smoothness = (double) options.customOptions.get("smoothness");
+		}
 	}
 
-	
+
 	@Override
 	public void draw() {
 		double time = getTime();
 
-        for (int c = 0; c < MAX_COLS; c++) {
-            for (int r = 0; r < MAX_ROWS; r++) {
-            	double metric = getMetric(r, c);
-                float hue = (float) ((metric / (smoothness * 10)) + ((double)time * speed / 10.0));
-                int[] rgbColor = hsvToRgb(hue, 1, 1);
-                this.setPixel(r, c, rgbColor[0], rgbColor[1], rgbColor[2]);
-            }
-        }
+		for (int c = 0; c < MAX_COLS; c++) {
+			for (int r = 0; r < MAX_ROWS; r++) {
+				double metric = getMetric(r, c);
+				float hue = (float) ((metric / (smoothness * 10)) + ((double)time * speed / 10.0));
+				int[] rgbColor = hsvToRgb(hue, 1, 1);
+				this.setPixel(r, c, rgbColor[0], rgbColor[1], rgbColor[2]);
+			}
+		}
 	}
-	
+
 	private double getMetric(int r, int c)
 	{
 		int rMid = (MAX_ROWS - 1) / 2;
 		int cMid = (MAX_COLS - 1) / 2;
-		
+
 		switch (direction) {
 		case BOTTOM:
 			return r;

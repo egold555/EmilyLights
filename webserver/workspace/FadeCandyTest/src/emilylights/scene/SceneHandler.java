@@ -22,7 +22,7 @@ public class SceneHandler {
 
 	private Scene currentAnimation = new SceneDummy();
 	private List<SceneDescriptor> sceneDescriptors = new ArrayList<SceneDescriptor>();
-	
+
 	public void setAnimation(int id) throws IOException {
 		reloadJSON();
 		for(SceneDescriptor sd : sceneDescriptors) {
@@ -31,16 +31,16 @@ public class SceneHandler {
 			}
 		}
 	}
-	
+
 	public Scene getAnimation() {
 		return currentAnimation;
 	}
-	
+
 	private Scene createSceneFromDescriptor(SceneDescriptor sd){
-		
+
 		int type = sd.type;
 		Scene scene;
-		
+
 		if(type == 0) {
 			scene = new SceneDots();
 		}
@@ -56,15 +56,17 @@ public class SceneHandler {
 		else {
 			scene = new SceneDummy();
 		}
-		
-		scene.setOptions(sd.options);
-		
+
+		if(sd.options != null) {
+			scene.setOptions(sd.options);
+		}
+
 		return scene;
 	}
-	
+
 	public void reloadJSON() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
 		Gson gson = new GsonBuilder().create();
 		sceneDescriptors =  ((ShittyWorkaround)gson.fromJson(new JsonReader(new FileReader(new File("files\\scenes.json"))), ShittyWorkaround.class)).scenes;
 	}
-	
+
 }
