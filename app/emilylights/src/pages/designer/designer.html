@@ -18,25 +18,19 @@
     </ion-item>
     <ion-item>
         <ion-label>Type</ion-label>
-        <ion-select [(ngModel)]="type">
+        <ion-select [(ngModel)]="type" (ngModelChange)="selectType(type)">
             <ion-option value="0">Dots</ion-option>
             <ion-option value="1">Gradient</ion-option>
             <ion-option value="2">Circles</ion-option>
         </ion-select>
     </ion-item>
-    <!--    <ion-item>-->
-    <!--        <ion-icon name="brush" item-start></ion-icon>-->
+    <br>
     <button ion-button full (click)="openColorPage()">Select Colors</button>
+    <br>
     <button ion-button full (click)="openOptions()">Scene Options</button>
-    <!--    </ion-item>-->
-    <!--
-    <ion-item>
-        <ion-label>On Percent</ion-label>
-        <ion-range [(ngModel)]="brightness">
-            <ion-icon range-left small name="sunny">0%</ion-icon>
-            <ion-icon range-right small name="sunny">100%</ion-icon>
-        </ion-range>
-    </ion-item>
--->
+
+    <br>
+    <br>
+    <button ion-button full color="secondary" (click)="createScene()">Create Scene</button>
 
 </ion-content>

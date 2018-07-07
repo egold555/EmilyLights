@@ -13,9 +13,10 @@ import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 import emilylights.scene.Scene;
 import emilylights.scene.SceneHandler;
-import emilylights.scene.SceneMusicGraph;
 import emilylights.scene.SceneRainbow;
 import emilylights.scene.SceneRainbow.Direction;
+import emilylights.scene.testing.SceneMusicGraph;
+import emilylights.scene.testing.SceneSnake;
 import emilylights.tester.AnimationTester;
 
 public class Main {
@@ -26,7 +27,7 @@ public class Main {
 	public static SceneHandler animationHandler = new SceneHandler();
 
 	private static final boolean ENABLE_WEB_SERVER = true;
-	private static final boolean ENABLE_LIGHT_WALL = true;
+	private static final boolean ENABLE_LIGHT_WALL = false;
 	private static final boolean ENABLE_TESTER = true;
 	
 	public static AudioPropertiers audioPropertiers = new AudioPropertiers();
@@ -37,8 +38,8 @@ public class Main {
 		OPCClient opc = new OPCClient(IP, PORT);
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
-		animationHandler.setAnimation(0);
-		
+		//animationHandler.setAnimation(0);
+		//animationHandler.setScene(new SceneRainbow());
 		
 		String[] audioSources = AudioUtils.getAudioSources(audio);
 		System.out.println(Arrays.toString(audioSources));

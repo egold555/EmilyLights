@@ -18,6 +18,10 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { ColorPage } from '../pages/designer/designer';
 
+import { SceneOptionCircles } from '../pages/designer/designer';
+import { SceneOptionDots } from '../pages/designer/designer';
+import { SceneOptionGradient } from '../pages/designer/designer';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -26,7 +30,10 @@ import { ColorPage } from '../pages/designer/designer';
     ScenesPage,
     TabsPage,
     ColorPicker,
-    ColorPage
+    ColorPage,
+    SceneOptionCircles,
+    SceneOptionDots,
+    SceneOptionGradient
   ],
   imports: [
     HttpModule,
@@ -41,7 +48,10 @@ import { ColorPage } from '../pages/designer/designer';
     SettingsPage,
     ScenesPage,
     TabsPage,
-    ColorPage
+    ColorPage,
+    SceneOptionCircles,
+    SceneOptionDots,
+    SceneOptionGradient
   ],
   providers: [
     StatusBar,

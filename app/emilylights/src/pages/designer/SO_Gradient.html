@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Gradient</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+
+    <ion-item>
+        <ion-label>Direction</ion-label>
+        <ion-select [(ngModel)]="type" (ngModelChange)="setDirection(type)">
+            <ion-option value="LEFT">LEFT</ion-option>
+            <ion-option value="RIGHT">RIGHT</ion-option>
+            <ion-option value="TOP">TOP</ion-option>
+            <ion-option value="BOTTOM">BOTTOM</ion-option>
+            <ion-option value="LEFT_TOP">LEFT_TOP</ion-option>
+            <ion-option value="LEFT_BOTTOM">LEFT_BOTTOM</ion-option>
+            <ion-option value="RIGHT_TOP">RIGHT_TOP</ion-option>
+            <ion-option value="RIGHT_BOTTOM">RIGHT_BOTTOM</ion-option>
+            <ion-option value="DIAMOND_IN">DIAMOND_IN</ion-option>
+            <ion-option value="DIAMOND_OUT">DIAMOND_OUT</ion-option>
+            <ion-option value="SQUARE_IN">SQUARE_IN</ion-option>
+            <ion-option value="SQUARE_OUT">SQUARE_OUT</ion-option>
+            <ion-option value="CIRCLE_IN">CIRCLE_IN</ion-option>
+            <ion-option value="CIRCLE_OUT">CIRCLE_OUT</ion-option>
+            <ion-option value="SOLID">SOLID</ion-option>
+
+        </ion-select>
+    </ion-item>
+
+</ion-content>

@@ -69,6 +69,10 @@ export class ScenesPage {
 
   }
 
+  itemAdd() {
+
+  }
+
   showToast(msg: string) {
     let toast = this.toastCtrl.create({
       message: msg,
@@ -106,7 +110,7 @@ export class ScenesPage {
           handler: data => {
             console.log('Delete clicked');
             this.showToast(scene.name + " deleted.");
-            //this.sendPost("scene_delete.txt", scene.name);
+            this.sendPost("delete/" + scene.id);
             this.refreshData(null);
           }
         }

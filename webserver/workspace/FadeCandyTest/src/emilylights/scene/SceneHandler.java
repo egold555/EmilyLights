@@ -17,6 +17,7 @@ import com.google.gson.stream.JsonReader;
 
 import emilylights.scene.options.SceneDescriptor;
 import emilylights.scene.options.ShittyWorkaround;
+import emilylights.scene.testing.SceneDummy;
 
 public class SceneHandler {
 
@@ -27,9 +28,13 @@ public class SceneHandler {
 		reloadJSON();
 		for(SceneDescriptor sd : sceneDescriptors) {
 			if(sd.id == id) {
-				this.currentAnimation = createSceneFromDescriptor(sd);
+				setScene(createSceneFromDescriptor(sd));
 			}
 		}
+	}
+	
+	public void setScene(Scene scene) {
+		this.currentAnimation = scene;
 	}
 
 	public Scene getAnimation() {

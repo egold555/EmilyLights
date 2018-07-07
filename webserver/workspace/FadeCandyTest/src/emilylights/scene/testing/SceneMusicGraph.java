@@ -1,6 +1,7 @@
-package emilylights.scene;
+package emilylights.scene.testing;
 
 import emilylights.Main;
+import emilylights.scene.Scene;
 
 public class SceneMusicGraph extends Scene {
 

@@ -1,4 +1,6 @@
-package emilylights.scene;
+package emilylights.scene.testing;
+
+import emilylights.scene.Scene;
 
 public class ScenePong extends Scene {
 

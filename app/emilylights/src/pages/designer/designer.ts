@@ -3,6 +3,33 @@ import { NavController, NavParams } from 'ionic-angular';
 
 
 @Component({
+  templateUrl: 'SO_Circles.html'
+})
+export class SceneOptionCircles {
+  constructor(params: NavParams) {
+
+  }
+}
+
+@Component({
+  templateUrl: 'SO_Dots.html'
+})
+export class SceneOptionDots {
+  constructor(params: NavParams) {
+
+  }
+}
+
+@Component({
+  templateUrl: 'SO_Gradient.html'
+})
+export class SceneOptionGradient {
+  constructor(params: NavParams) {
+
+  }
+}
+
+@Component({
   templateUrl: 'color-page.html'
 })
 export class ColorPage {
@@ -24,8 +51,6 @@ export class ColorPage {
     ];
   }
 
-
-
 }
 
 @Component({
@@ -35,6 +60,7 @@ export class ColorPage {
 export class DesignerPage {
 
   private color: string = "FF0000";
+  private selected: string = null;
 
   constructor(public navCtrl: NavController) {
 
@@ -54,6 +80,31 @@ export class DesignerPage {
 
   openColorPage() {
     this.navCtrl.push(ColorPage, {});
+  }
+
+  openOptions() {
+    if (this.selected != null) {
+      if (this.selected == 0) {
+        //Dots
+          this.navCtrl.push(SceneOptionDots, {});
+      }
+      else if (this.selected == 1) {
+        //Gradient
+          this.navCtrl.push(SceneOptionGradient, {});
+      }
+      else if (this.selected == 2) {
+        //Circles
+          this.navCtrl.push(SceneOptionCircles, {});
+      }
+    }
+  }
+
+  createScene() {
+
+  }
+
+  selectType(event: string) {
+    this.selected = event;
   }
 
 }
