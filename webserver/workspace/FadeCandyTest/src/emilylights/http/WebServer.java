@@ -54,41 +54,10 @@ public class WebServer {
 			//No need to return anything else besides 200 cause yeah
 			t.sendResponseHeaders(200, response.getBytes().length);
 
-			List<String> body = new ArrayList<String>();
-			String line;
-			BufferedReader r = new BufferedReader(new InputStreamReader(t.getRequestBody()));
-			while ((line=r.readLine()) != null) {
-				body.add(line);
-			}
-			System.out.println("Body: " + Arrays.toString(body.toArray(new String[0])));
-			if(body.size() > 0) {
-				testGSON(body.get(0));
-			}
-
 			OutputStream os = t.getResponseBody();
 			os.write(response.getBytes());
 			os.close();
 		}
-	}
-
-	private void testGSON(String in) {
-
-		Gson gson = new GsonBuilder().create();
-
-//		SceneOptions src = new SceneOptions();
-//
-//		src.type = 2;
-//		src.colors = new Color[] {new Color(255, 255, 0), new Color(255, 255, 255), new Color(0, 0, 255)};
-//
-//		HashMap<String, String> options = new HashMap<String, String>();
-//		options.put("speed", "1");
-//		options.put("direction", "TOP");
-//
-//		src.options = options;
-//		System.out.println(gson.toJson(src));
-
-		SceneDescriptor optns = gson.fromJson(in, SceneDescriptor.class);
-		System.out.println(optns.toString());
 	}
 
 	private String getResponse(String[] urlParts) {
