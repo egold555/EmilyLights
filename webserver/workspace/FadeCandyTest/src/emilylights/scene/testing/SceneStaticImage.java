@@ -1,4 +1,4 @@
-package emilylights.scene;
+package emilylights.scene.testing;
 
 import java.io.IOException;
 

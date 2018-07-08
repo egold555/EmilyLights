@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.Arrays;
 
-import com.sun.imageio.spi.RAFImageInputStreamSpi;
-
 import emilylights.audio.Audio;
 import emilylights.audio.AudioPropertiers;
 import emilylights.audio.AudioUtils;
@@ -13,10 +11,6 @@ import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 import emilylights.scene.Scene;
 import emilylights.scene.SceneHandler;
-import emilylights.scene.SceneRainbow;
-import emilylights.scene.SceneRainbow.Direction;
-import emilylights.scene.testing.SceneMusicGraph;
-import emilylights.scene.testing.SceneSnake;
 import emilylights.tester.AnimationTester;
 
 public class Main {

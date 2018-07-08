@@ -3,6 +3,8 @@ package emilylights.scene;
 import java.util.ArrayList;
 import java.util.List;
 
+import emilylights.scene.options.Color;
+
 public class SceneCircles extends Scene {
 	private static final double WIDTH = 1.1F;
 	private static final double SPEED = 0.07F;
@@ -28,12 +30,12 @@ public class SceneCircles extends Scene {
 					double distance = Math.sqrt((row - drop.row) * (row - drop.row) + (col - drop.column) * (col - drop.column));
 					double dsq = (distance - drop.radius) * (distance - drop.radius);
 					float value = (float) Math.exp(- dsq / WIDTH);
-					addPixel(row, col, hsvToRgb(drop.hue, drop.saturation, value));
+					addPixel(row, col, new Color(drop.hue, drop.saturation, value));
 				}
 			}
 		}
 	}
-	
+
 	private void advanceDrops() {
 		for (Drop drop: drops) {
 			drop.radius += SPEED;

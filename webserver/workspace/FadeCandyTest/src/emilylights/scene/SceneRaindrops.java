@@ -3,6 +3,8 @@ package emilylights.scene;
 import java.util.ArrayList;
 import java.util.List;
 
+import emilylights.scene.options.Color;
+
 public class SceneRaindrops extends Scene {
 	
 	private static final int DROP_LEN = 7;
@@ -26,12 +28,10 @@ public class SceneRaindrops extends Scene {
 	private void drawDrops()
 	{
 		for (Drop drop: drops) {
-			int[] colors = this.hsvToRgb(drop.hue, drop.saturation, 1);
-			addPixelAntiAlias(drop.row, drop.column, colors);
+			addPixelAntiAlias(drop.row, drop.column, new Color(drop.hue, drop.saturation, 1));
 			for (int i = 1; i <= DROP_LEN; ++i) {
-				int[] c = this.hsvToRgb(drop.hue, drop.saturation, (float) lerp(DROP_VALUESTART, 0, (float) i / DROP_LEN));
 				if (drop.row- i >= -1) {
-					addPixelAntiAlias(drop.row - i, drop.column, c);
+					addPixelAntiAlias(drop.row - i, drop.column, new Color(drop.hue, drop.saturation, (float) lerp(DROP_VALUESTART, 0, (float) i / DROP_LEN)));
 				}
 			}
 		}

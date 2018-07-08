@@ -1,10 +1,12 @@
 package emilylights.scene;
 
+import emilylights.scene.options.Color;
+
 public class SceneDots extends Scene {
 
-	private float advance = 0.02f;
+	private static final float advance = 0.02f;
 	private float hue = 0f;
-	private float hueAdvance = 0.0001f;
+	private static final float hueAdvance = 0.0001f;
 	
 	private DotData[] dotArray = new DotData[PIXEL_COUNT];
 	
@@ -19,8 +21,7 @@ public class SceneDots extends Scene {
 		for(int i = 0; i < PIXEL_COUNT; i++) {
 			DotData dd = dotArray[i];
 			float lightValue = (float)lerp(dd.start, dd.end, dd.current);
-			int[] rgb = hsvToRgb(hue, 1, lightValue);
-			setPixel(i, rgb[0], rgb[1], rgb[2]);
+			setPixel(i, new Color(hue, 1, lightValue));
 			dd.current += advance;
 			if (dd.current > 1) {
 				dd.start = dd.end;

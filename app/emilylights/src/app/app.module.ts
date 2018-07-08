@@ -17,10 +17,12 @@ import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { ColorPage } from '../pages/designer/designer';
+import { ColorPickerPage } from '../pages/designer/designer';
 
 import { SceneOptionCircles } from '../pages/designer/designer';
 import { SceneOptionDots } from '../pages/designer/designer';
 import { SceneOptionGradient } from '../pages/designer/designer';
+import { SceneOptionRainDrops } from '../pages/designer/designer';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,11 @@ import { SceneOptionGradient } from '../pages/designer/designer';
     TabsPage,
     ColorPicker,
     ColorPage,
+    ColorPickerPage,
     SceneOptionCircles,
     SceneOptionDots,
-    SceneOptionGradient
+    SceneOptionGradient,
+    SceneOptionRainDrops
   ],
   imports: [
     HttpModule,
@@ -49,9 +53,11 @@ import { SceneOptionGradient } from '../pages/designer/designer';
     ScenesPage,
     TabsPage,
     ColorPage,
+    ColorPickerPage,
     SceneOptionCircles,
     SceneOptionDots,
-    SceneOptionGradient
+    SceneOptionGradient,
+    SceneOptionRainDrops
   ],
   providers: [
     StatusBar,

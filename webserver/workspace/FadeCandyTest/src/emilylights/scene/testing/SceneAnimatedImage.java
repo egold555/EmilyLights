@@ -1,4 +1,4 @@
-package emilylights.scene;
+package emilylights.scene.testing;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+
+import emilylights.scene.Scene;
+import emilylights.scene.options.Color;
 
 public class SceneAnimatedImage extends Scene{
 
@@ -32,7 +35,7 @@ public class SceneAnimatedImage extends Scene{
 			for(int row = 0; row < MAX_ROWS; row++) {
 				for(int col = 0; col < MAX_COLS; col++) {
 					int[] rgb = getRGB(col, row);
-					setPixel(row, col, rgb[0], rgb[1], rgb[2]);
+					setPixel(row, col, new Color(rgb));
 				}
 			}
 		}

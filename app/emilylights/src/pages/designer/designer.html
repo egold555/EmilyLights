@@ -7,11 +7,6 @@
 </ion-header>
 
 <ion-content padding>
-
-    <!--
-    <p>Color: {{color}}</p>
-    <color-picker [hexColor]="'#FF0000'" (colorChanged)="setColor($event)" (colorTouchStart)="colorTouchStart()" (colorTouchEnd)="colorTouchEnd()"></color-picker>
--->
     <ion-item>
         <ion-label fixed>Name</ion-label>
         <ion-input id="id_name" type="text" [(ngModel)]="value_name"></ion-input>
@@ -22,6 +17,7 @@
             <ion-option value="0">Dots</ion-option>
             <ion-option value="1">Gradient</ion-option>
             <ion-option value="2">Circles</ion-option>
+            <ion-option value="3">Raindrops</ion-option>
         </ion-select>
     </ion-item>
     <br>

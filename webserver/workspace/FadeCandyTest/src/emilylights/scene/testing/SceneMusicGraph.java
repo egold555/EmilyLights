@@ -2,6 +2,7 @@ package emilylights.scene.testing;
 
 import emilylights.Main;
 import emilylights.scene.Scene;
+import emilylights.scene.options.Color;
 
 public class SceneMusicGraph extends Scene {
 
@@ -21,10 +22,8 @@ public class SceneMusicGraph extends Scene {
 			test = 9 - test;
 			
 			System.out.println("Audio: " + test);
-
-			int[] color = hsvToRgb((float)bar/11, 1, 1);
 			
-			this.setLineCol(bar, 8, test, color[0], color[1], color[2]);
+			this.setLineCol(bar, 8, test, new Color((float)bar/11, 1, 1));
 		}
 	}
 

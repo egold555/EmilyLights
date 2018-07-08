@@ -1,42 +1,155 @@
 package emilylights.scene.options;
 
+import java.util.Arrays;
+
 public class Color {
 
-	public static Color RAINBOW = new Color(-1, -1, -1);
+	public static Color RAINBOW = new Color("#RAINBOW");
+
+	private final String hex;
+
+	public Color(String in) {
+		if(in.charAt(0) != '#') {
+			in = "#" + in;
+		}
+		this.hex = in;
+	}
+
+	public Color(int r, int g, int b) {
+		this(rgbToHex(r, g, b));
+	}
+
+	public Color(int[] rgb) {
+		this(rgb[0], rgb[1], rgb[2]);
+	}
+
+	public Color(float h, float s, float v) {
+		this(hsvToRgb(h, s, v));
+	}
+
+	public Color(float[] hsv) {
+		this(hsv[0], hsv[1], hsv[2]);
+	}
+
+
+	//Getters
 	
-	private final int red;
-	private final int green;
-	private final int blue;
-	
-	public Color(String hex) {
-		this.red = Integer.valueOf( hex.substring( 1, 3 ), 16 );
-		this.green = Integer.valueOf( hex.substring( 3, 5 ), 16 );
-		this.blue = Integer.valueOf( hex.substring( 5, 7 ), 16 );
+	public boolean isRainbow() {
+		return this.hex.equals("#RAINBOW");
 	}
 	
-	public Color(int red, int green, int blue) {
-		this.red = red;
-		this.green = green;
-		this.blue = blue;
+	public String getHex() {
+		return hex;
+	}
+
+	public int[] getRGB() {
+		return new int[] {getRed(), getGreen(), getBlue()};
 	}
 
 	public int getRed() {
-		return red;
+		return Integer.valueOf( hex.substring( 1, 3 ), 16 );
 	}
 
 	public int getGreen() {
-		return green;
+		return Integer.valueOf( hex.substring( 3, 5 ), 16 );
 	}
 
 	public int getBlue() {
-		return blue;
+		return Integer.valueOf( hex.substring( 5, 7 ), 16 );
 	}
 
+	//	public float[] getHSV() {
+	//		return new float[] {getHue(), getSaturation(), getValue()};
+	//	}
+	//
+	//	public float getHue() {
+	//		java.awt.Color.
+	//	}
+	//	
+	//	public float getSaturation() {
+	//		
+	//	}
+	//	
+	//	public float getValue() {
+	//		
+	//	}
+	
 	@Override
 	public String toString() {
-		return "Color [red=" + red + ", green=" + green + ", blue=" + blue + "]";
+		return "Color [isRainbow()=" + isRainbow() + ", getHex()=" + getHex() + ", getRGB()=" + Arrays.toString(getRGB()) + "]";
 	}
+
 	
-	
-	
+	//UTILS
+	private static int[] hsvToRgb(float h, float s, float v)
+	{
+		int i;
+		float f, p, q, t;
+		float r, g, b;
+		if (s == 0) {
+			// achromatic (grey)
+			r = g = b = v;
+		}
+		else {
+			if (h >= 1 || h <= -1)
+				h = h % 1;
+			if (h < 0)
+				h += 1;
+			h *= 6;         // sector 0 to 5
+			i = (int)Math.floor(h);
+			f = h - i;          // factorial part of h
+			p = v * (1 - s);
+			q = v * (1 - s * f);
+			t = v * (1 - s * (1 - f));
+			switch (i) {
+			case 0:
+				r = v;
+				g = t;
+				b = p;
+				break;
+			case 1:
+				r = q;
+				g = v;
+				b = p;
+				break;
+			case 2:
+				r = p;
+				g = v;
+				b = t;
+				break;
+			case 3:
+				r = p;
+				g = q;
+				b = v;
+				break;
+			case 4:
+				r = t;
+				g = p;
+				b = v;
+				break;
+			default:        // case 5:
+				r = v;
+				g = p;
+				b = q;
+				break;
+			}
+		}
+
+		return new int[] {(int)Math.round(r * 255.0), (int)Math.round(g * 255.0), (int)Math.round(b * 255.0)};
+	}
+
+	private static String rgbToHex(int r, int g, int b) {
+		String rs = Integer.toHexString(r);
+		String gs = Integer.toHexString(g);
+		String bs = Integer.toHexString(b);
+
+		if (rs.length() == 1)
+			rs = "0" + rs;
+		if (gs.length() == 1)
+			gs = "0" + gs;
+		if (bs.length() == 1)
+			bs = "0" + bs;
+		return "#" + rs + gs + bs;
+	}
+
 }

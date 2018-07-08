@@ -1,0 +1,10 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Colors Picker</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <p>Color: {{color}}</p>
+    <color-picker [hexColor]="'#FF0000'" (colorChanged)="setColor($event)" (colorTouchStart)="colorTouchStart()" (colorTouchEnd)="colorTouchEnd()"></color-picker>
+</ion-content>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import emilylights.scene.Scene;
+import emilylights.scene.options.Color;
 
 public class SceneSnake extends Scene {
 
@@ -35,7 +36,7 @@ public class SceneSnake extends Scene {
 
 			//Drawing snake code
 			for(Trail t : trail) {
-				setPixel(t.x, t.y, 0, 255, 0);
+				setPixel(t.x, t.y, new Color(0, 255, 0));
 				if(t.x == px && t.y == py) {
 					tail = 5;
 					//player died
@@ -50,7 +51,7 @@ public class SceneSnake extends Scene {
 				ay = RANDOM.nextInt(MAX_COLS);
 			}
 			
-			setPixel(ax, ay, 255, 0, 0);
+			setPixel(ax, ay, new Color(255, 0, 0));
 			
 		}
 

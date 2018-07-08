@@ -13,21 +13,12 @@
 
     <ion-list>
 
-        <ion-item-sliding *ngFor="let color of colors">
-            <ion-item>
-                <ion-thumbnail item-start>
-                    <!--                    <img src="{{ color.hex }}">-->
-                    <div class="color-block" [ngStyle]="{'background-color': color.hex}"></div>
-                </ion-thumbnail>
-                <h2>{{ color.name }}</h2>
-            </ion-item>
-            <ion-item-options>
-                <button ion-button (click)="itemApply(scene)" color="primary" icon-start><ion-icon name="eye"></ion-icon>Apply</button>
-                <button ion-button (click)="itemEdit(scene)" color="secondary" icon-start><ion-icon name="brush"></ion-icon>Edit</button>
-                <button ion-button (click)="itemDelete(scene)" color="danger" icon-start><ion-icon name="trash"></ion-icon>Delete</button>
-            </ion-item-options>
-
-        </ion-item-sliding>
+        <ion-item *ngFor="let color of colors">
+            <ion-thumbnail item-start>
+                <div class="color-block" [ngStyle]="{'background-color': color.hex}"></div>
+            </ion-thumbnail>
+            <h2>{{ color.name }}</h2>
+        </ion-item>
 
     </ion-list>
 

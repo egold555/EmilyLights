@@ -3,6 +3,15 @@ import { NavController, NavParams } from 'ionic-angular';
 
 
 @Component({
+  templateUrl: 'SO_RainDrops.html'
+})
+export class SceneOptionRainDrops {
+  constructor(params: NavParams) {
+
+  }
+}
+
+@Component({
   templateUrl: 'SO_Circles.html'
 })
 export class SceneOptionCircles {
@@ -30,13 +39,38 @@ export class SceneOptionGradient {
 }
 
 @Component({
+  templateUrl: 'colorpicker.html'
+})
+export class ColorPickerPage {
+
+  color: string = "#FF0000";
+
+  constructor(params: NavParams) {
+
+  }
+
+  setColor(event: any) {
+    this.color = event;
+  }
+
+  colorTouchStart() {
+
+  }
+
+  colorTouchEnd() {
+
+  }
+
+}
+
+@Component({
   templateUrl: 'color-page.html'
 })
 export class ColorPage {
 
   colors: any[];
 
-  constructor(params: NavParams) {
+  constructor(public navCtrl: NavController, params: NavParams) {
     this.colors = [
 
       {
@@ -51,6 +85,10 @@ export class ColorPage {
     ];
   }
 
+  add() {
+    this.navCtrl.push(ColorPickerPage, {});
+  }
+
 }
 
 @Component({
@@ -59,15 +97,10 @@ export class ColorPage {
 })
 export class DesignerPage {
 
-  private color: string = "FF0000";
   private selected: string = null;
 
   constructor(public navCtrl: NavController) {
 
-  }
-
-  setColor(ev: string) {
-    this.color = ev;
   }
 
   colorTouchStart() {
@@ -84,17 +117,21 @@ export class DesignerPage {
 
   openOptions() {
     if (this.selected != null) {
-      if (this.selected == 0) {
+      if (this.selected == "0") {
         //Dots
-          this.navCtrl.push(SceneOptionDots, {});
+        this.navCtrl.push(SceneOptionDots, {});
       }
-      else if (this.selected == 1) {
+      else if (this.selected == "1") {
         //Gradient
-          this.navCtrl.push(SceneOptionGradient, {});
+        this.navCtrl.push(SceneOptionGradient, {});
       }
-      else if (this.selected == 2) {
+      else if (this.selected == "2") {
         //Circles
-          this.navCtrl.push(SceneOptionCircles, {});
+        this.navCtrl.push(SceneOptionCircles, {});
+      }
+      else if (this.selected == "3") {
+        //RainDrops
+        this.navCtrl.push(SceneOptionRainDrops, {});
       }
     }
   }

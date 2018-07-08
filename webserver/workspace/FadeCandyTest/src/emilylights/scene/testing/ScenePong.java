@@ -1,6 +1,7 @@
 package emilylights.scene.testing;
 
 import emilylights.scene.Scene;
+import emilylights.scene.options.Color;
 
 public class ScenePong extends Scene {
 
@@ -72,10 +73,10 @@ public class ScenePong extends Scene {
 
 		
 		
-		this.setLineCol(0, this.paddle1Y, this.paddle1Y + 3, 255, 0, 0); //draw paddle Left
-		this.setLineCol(10, this.paddle1Y, this.paddle1Y + 3, 0, 0, 255); //draw paddle Left
+		this.setLineCol(0, this.paddle1Y, this.paddle1Y + 3, new Color(255, 0, 0)); //draw paddle Left
+		this.setLineCol(10, this.paddle1Y, this.paddle1Y + 3, new Color(0, 0, 255)); //draw paddle Left
 		
-		this.setPixel(ballY, ballX, hit ? 0 : 255,  255, hit ? 0 : 255);
+		this.setPixel(ballY, ballX, new Color(hit ? 0 : 255,  255, hit ? 0 : 255));
 		
 	}
 

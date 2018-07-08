@@ -2,6 +2,7 @@ package emilylights.scene;
 
 import java.util.Random;
 
+import emilylights.scene.options.Color;
 import emilylights.scene.options.SceneOptions;
 
 public abstract class Scene {
@@ -16,83 +17,80 @@ public abstract class Scene {
 
 	private byte[] pixels = null;
 
-	public final void fillCol(int col, int red, int green, int blue) {
-		fillRect(0, col, MAX_ROWS - 1, col, red, green, blue);
+	public final void fillCol(int col, Color color) {
+		fillRect(0, col, MAX_ROWS - 1, col, color);
 	}
 
-	public final void fillRow(int row, int red, int green, int blue) {
-		fillRect(row, 0, row,  MAX_COLS - 1, red, green, blue);
+	public final void fillRow(int row, Color color) {
+		fillRect(row, 0, row,  MAX_COLS - 1, color);
 	}
 
-	public final void setAllPixels(int red, int green, int blue) {
-		fillRect(0, 0, MAX_ROWS-1, MAX_COLS-1, red, green, blue);
+	public final void setAllPixels(Color color) {
+		fillRect(0, 0, MAX_ROWS-1, MAX_COLS-1, color);
 	}
 
-	public final void setLineRow(int row, int start, int end, int red, int green, int blue) {
+	public final void setLineRow(int row, int start, int end, Color color) {
 		for (int col = start; col < end; col++) {
-			this.setPixel(row, col, red, green, blue);
+			this.setPixel(row, col, color);
 		}
 	}
 
-	public final void setLineCol(int col, int start, int end, int red, int green, int blue) {
+	public final void setLineCol(int col, int start, int end, Color color) {
 		if (start <= end) {
 			for (int row = start; row <= end; row++) {
-				this.setPixel(row, col, red, green, blue);
+				this.setPixel(row, col, color);
 			}
 		} else {
 			for (int row = end; row <= start; row++) {
-				this.setPixel(row, col, red, green, blue);
+				this.setPixel(row, col, color);
 			}
 		}
 
 	}
 
-	public final void fillRect(int firstRow, int firstCol, int lastRow, int lastCol, int red, int green, int blue) {
+	public final void fillRect(int firstRow, int firstCol, int lastRow, int lastCol, Color color) {
 		for(int row = firstRow; row <= lastRow; row++) {
 			for(int col = firstCol; col <= lastCol; col++) {
-				setPixel(row, col, red, green, blue);
+				setPixel(row, col, color);
 			}
 		}
 	}
 
-	public final void setPixel(int row, int col, int red, int green, int blue) {
+	public final void setPixel(int row, int col, Color color) {
 		if (row < 0 || row >= MAX_ROWS || col < 0 || col >= MAX_COLS)
 			return;
-		setPixel(row + col * MAX_ROWS, red, green, blue);
+		setPixel(row + col * MAX_ROWS, color);
 	}
 
-	public final void setPixel(int row, int col, int[] colors)
-	{
-		setPixel(row, col, colors[0], colors[1], colors[2]);
-	}
-
-	public final void setPixel(int num, int[] colors) {
-		setPixel(num, colors[0], colors[1], colors[2]);
-	}
-
-	public final void setPixel(int num, int red, int green, int blue) {
+	public final void setPixel(int num, Color color) {
 		if (num < 0 || num >= PIXEL_COUNT) {
 			return;
 		}
 
 		int offset = num * 3;
-		pixels[offset] = (byte) red;
-		pixels[offset+1] = (byte) green;
-		pixels[offset+2] = (byte) blue;
+		pixels[offset] = (byte) color.getRed();
+		pixels[offset+1] = (byte) color.getGreen();
+		pixels[offset+2] = (byte) color.getBlue();
 	}
 
 
+	public final void addPixel(int row, int col, Color color) {
+		addPixel(row, col, color.getRed(), color.getGreen(), color.getBlue());
+	}
+	
+	@Deprecated
 	public final void addPixel(int row, int col, int red, int green, int blue) {
 		if (row < 0 || row >= MAX_ROWS || col < 0 || col >= MAX_COLS)
 			return;
 		addPixel(row + col * MAX_ROWS, red, green, blue);
 	}
 
-	public final void addPixel(int row, int col, int[] colors)
-	{
-		addPixel(row, col, colors[0], colors[1], colors[2]);
-	}
-
+//	@Deprecated
+//	public final void addPixel(int num, int[] rgb) {
+//		addPixel(num, rgb[0], rgb[1], rgb[2]);
+//	}
+	
+	@Deprecated
 	public final void addPixel(int num, int red, int green, int blue) {
 		if (num < 0 || num >= PIXEL_COUNT) {
 			return;
@@ -118,6 +116,7 @@ public abstract class Scene {
 		pixels[offset+2] = (byte) blue;
 	}
 
+	@Deprecated
 	public final void addPixelAntiAlias(double row, double col, int red, int green, int blue) {
 		if (row <= -1 || row >= MAX_ROWS || col <= -1 || col >= MAX_COLS)
 			return;
@@ -130,7 +129,7 @@ public abstract class Scene {
 		double colFrac = col - col1;
 
 		if (rowFrac == 0 && colFrac == 0) {
-			addPixel((int) row, (int) col, red, green, blue);
+			addPixel((int) row, (int) col, new Color(red, green, blue));
 			return;
 		}
 
@@ -167,9 +166,9 @@ public abstract class Scene {
 		addPixel(row2, col2, (int) Math.round(red * r2c2Frac), (int) Math.round(green * r2c2Frac), (int) Math.round(blue * r2c2Frac));
 	}
 
-	public final void addPixelAntiAlias(double row, double col, int[] colors)
+	public final void addPixelAntiAlias(double row, double col, Color color)
 	{
-		addPixelAntiAlias(row, col, colors[0], colors[1], colors[2]);
+		addPixelAntiAlias(row, col, color.getRed(), color.getGreen(), color.getBlue());
 	}
 
 
@@ -200,66 +199,10 @@ public abstract class Scene {
 		return pixels;
 	}
 
-	public final int[] hsvToRgb(float h, float s, float v)
-	{
-		int i;
-		float f, p, q, t;
-		float r, g, b;
-		if (s == 0) {
-			// achromatic (grey)
-			r = g = b = v;
-		}
-		else {
-			if (h >= 1 || h <= -1)
-				h = h % 1;
-			if (h < 0)
-				h += 1;
-			h *= 6;         // sector 0 to 5
-			i = (int)Math.floor(h);
-			f = h - i;          // factorial part of h
-			p = v * (1 - s);
-			q = v * (1 - s * f);
-			t = v * (1 - s * (1 - f));
-			switch (i) {
-			case 0:
-				r = v;
-				g = t;
-				b = p;
-				break;
-			case 1:
-				r = q;
-				g = v;
-				b = p;
-				break;
-			case 2:
-				r = p;
-				g = v;
-				b = t;
-				break;
-			case 3:
-				r = p;
-				g = q;
-				b = v;
-				break;
-			case 4:
-				r = t;
-				g = p;
-				b = v;
-				break;
-			default:        // case 5:
-				r = v;
-				g = p;
-				b = q;
-				break;
-			}
-		}
-
-		return new int[] {(int)Math.round(r * 255.0), (int)Math.round(g * 255.0), (int)Math.round(b * 255.0)};
-	}
-
-	public final int[] rgbToInt(float r, float g, float b) {
-		return new int[] {(int)(r * 255), (int)(g * 255), (int)(b * 255)};
-	}
+//	@Deprecated
+//	public final int[] rgbToInt(float r, float g, float b) {
+//		return new int[] {(int)(r * 255), (int)(g * 255), (int)(b * 255)};
+//	}
 
 	public final double lerp(double v0, double v1, double t) {
 		return v0 * (1 - t) + v1 * t;

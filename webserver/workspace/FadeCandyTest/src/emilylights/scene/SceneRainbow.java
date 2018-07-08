@@ -1,5 +1,6 @@
 package emilylights.scene;
 
+import emilylights.scene.options.Color;
 import emilylights.scene.options.SceneOptions;
 
 public class SceneRainbow extends Scene {
@@ -31,8 +32,7 @@ public class SceneRainbow extends Scene {
 			for (int r = 0; r < MAX_ROWS; r++) {
 				double metric = getMetric(r, c);
 				float hue = (float) ((metric / (smoothness * 10)) + ((double)time * speed / 10.0));
-				int[] rgbColor = hsvToRgb(hue, 1, 1);
-				this.setPixel(r, c, rgbColor[0], rgbColor[1], rgbColor[2]);
+				this.setPixel(r, c, new Color(hue, 1, 1));
 			}
 		}
 	}
