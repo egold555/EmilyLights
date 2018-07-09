@@ -62,7 +62,7 @@ export class ScenesPage {
   }
 
   itemApply(item: any) {
-    this.sendPost('setanimation/' + item.id);
+    this.sendPost('set/' + item.id);
   }
 
   itemEdit(item: any) {

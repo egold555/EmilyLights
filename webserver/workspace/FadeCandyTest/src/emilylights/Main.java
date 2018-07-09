@@ -61,7 +61,7 @@ public class Main {
 			webServer.start();
 		}
 		
-		animationHandler.reloadJSON();
+		//animationHandler.reloadJSON();
 
 		log("Running animation..");
 		log("Press ENTER to exit.");

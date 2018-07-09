@@ -3,6 +3,7 @@ package emilylights.scene;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import emilylights.scene.options.SceneDescriptor;
 import emilylights.scene.options.ShittyWorkaround;
@@ -21,8 +23,18 @@ public class SceneHandler {
 
 	private Scene currentAnimation = new SceneDummy();
 	private List<SceneDescriptor> sceneDescriptors = new ArrayList<SceneDescriptor>();
+	private static final File SCENES_FILE = new File("files\\scenes.json");
 
-	public void setAnimation(int id) throws IOException {
+	public SceneHandler() {
+		try {
+			reloadJSON();
+		} catch (JsonIOException | JsonSyntaxException | FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} //Just to make sure, I dont think I need this but it doesnt hurt
+	}
+	
+	public void setScene(int id) throws IOException {
 		reloadJSON();
 		for(SceneDescriptor sd : sceneDescriptors) {
 			if(sd.id == id) {
@@ -67,9 +79,28 @@ public class SceneHandler {
 		return scene;
 	}
 
-	public void reloadJSON() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
+	private void reloadJSON() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
 		Gson gson = new GsonBuilder().create();
-		sceneDescriptors =  ((ShittyWorkaround)gson.fromJson(new JsonReader(new FileReader(new File("files\\scenes.json"))), ShittyWorkaround.class)).scenes;
+		sceneDescriptors = ((ShittyWorkaround)gson.fromJson(new JsonReader(new FileReader(SCENES_FILE)), ShittyWorkaround.class)).scenes;
+	}
+	
+	private void saveJSON() throws JsonIOException, IOException {
+		Gson gson = new GsonBuilder().create();
+		gson.toJson(new ShittyWorkaround(this.sceneDescriptors), new FileWriter(SCENES_FILE));
+	}
+	
+	public void deleteScene(int id) throws JsonIOException, IOException {
+		reloadJSON();
+		int indexToRemove = -1;
+		for(SceneDescriptor sd : sceneDescriptors) {
+			if(sd.id == id) {
+				indexToRemove = sceneDescriptors.indexOf(sd);
+			}
+		}
+		if(indexToRemove != -1) {
+			sceneDescriptors.remove(indexToRemove);
+		}
+		saveJSON();
 	}
 
 }

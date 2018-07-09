@@ -59,8 +59,11 @@ public class WebServer {
 			if(urlParts[0].equals("scenes.json")) {
 				return new String(Files.readAllBytes(new File("files\\scenes.json").toPath()));
 			}
-			else if(urlParts[0].equals("setanimation")) {
-				animationHandler.setAnimation(Integer.parseInt(urlParts[1]));
+			else if(urlParts[0].equals("set")) {
+				animationHandler.setScene(Integer.parseInt(urlParts[1]));
+			}
+			else if(urlParts[0].equals("delete")) {
+				animationHandler.deleteScene(Integer.parseInt(urlParts[1]));
 			}
 		}
 		catch (Exception e) {

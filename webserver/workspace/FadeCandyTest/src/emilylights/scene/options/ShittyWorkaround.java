@@ -6,4 +6,8 @@ public class ShittyWorkaround {
 
 	public List<SceneDescriptor> scenes;
 	
+	public ShittyWorkaround(List<SceneDescriptor> scenes) {
+		this.scenes = scenes;
+	}
+	
 }
