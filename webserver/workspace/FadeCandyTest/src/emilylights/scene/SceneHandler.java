@@ -28,7 +28,7 @@ public class SceneHandler {
 	public SceneHandler() {
 		try {
 			reloadJSON();
-		} catch (JsonIOException | JsonSyntaxException | FileNotFoundException e) {
+		} catch (JsonIOException | JsonSyntaxException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} //Just to make sure, I dont think I need this but it doesnt hurt
@@ -79,14 +79,18 @@ public class SceneHandler {
 		return scene;
 	}
 
-	private void reloadJSON() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
-		Gson gson = new GsonBuilder().create();
-		sceneDescriptors = ((ShittyWorkaround)gson.fromJson(new JsonReader(new FileReader(SCENES_FILE)), ShittyWorkaround.class)).scenes;
+	private void reloadJSON() throws JsonIOException, JsonSyntaxException, IOException {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		FileReader fileReader = new FileReader(SCENES_FILE);
+		sceneDescriptors = ((ShittyWorkaround)gson.fromJson(new JsonReader(fileReader), ShittyWorkaround.class)).scenes;
+		fileReader.close();
 	}
 	
 	private void saveJSON() throws JsonIOException, IOException {
-		Gson gson = new GsonBuilder().create();
-		gson.toJson(new ShittyWorkaround(this.sceneDescriptors), new FileWriter(SCENES_FILE));
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		FileWriter fileWriter = new FileWriter(SCENES_FILE);
+		gson.toJson(new ShittyWorkaround(this.sceneDescriptors), fileWriter);
+		fileWriter.close();
 	}
 	
 	public void deleteScene(int id) throws JsonIOException, IOException {
