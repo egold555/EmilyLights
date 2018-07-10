@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Http } from '@angular/http';
 
 
 @Component({
@@ -9,6 +10,11 @@ export class SceneOptionRainDrops {
   constructor(params: NavParams) {
 
   }
+
+  ionViewCanLeave() {
+    DesignerPage.options = { dropLength: this.dropLength, dropValueStart: this.dropValueStart, dropMinTime: this.dropMinTime, dropMaxTime: this.dropMaxTime, speed: this.speed};
+  }
+
 }
 
 @Component({
@@ -97,9 +103,9 @@ export class ColorPage {
 })
 export class DesignerPage {
 
-  private selected: string = null;
+  public static options: any = {};
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public http: Http) {
 
   }
 
@@ -116,20 +122,21 @@ export class DesignerPage {
   }
 
   openOptions() {
-    if (this.selected != null) {
-      if (this.selected == "0") {
+    var selected: string = this.type;
+    if (selected != null) {
+      if (selected == "0") {
         //Dots
         this.navCtrl.push(SceneOptionDots, {});
       }
-      else if (this.selected == "1") {
+      else if (selected == "1") {
         //Gradient
         this.navCtrl.push(SceneOptionGradient, {});
       }
-      else if (this.selected == "2") {
+      else if (selected == "2") {
         //Circles
         this.navCtrl.push(SceneOptionCircles, {});
       }
-      else if (this.selected == "3") {
+      else if (selected == "3") {
         //RainDrops
         this.navCtrl.push(SceneOptionRainDrops, {});
       }
@@ -137,11 +144,19 @@ export class DesignerPage {
   }
 
   createScene() {
-
+    var postData: any = {};
+    postData.name = this.value_name; //this works cuse Ionic. TS hates this!
+    postData.type = this.type;
+    postData.options = DesignerPage.options;
+    this.sendPost("add", JSON.stringify(postData));
   }
 
-  selectType(event: string) {
-    this.selected = event;
+  getURL(file: string) {
+    return "http://192.168.1.56:8000/" + file;
+  }
+
+  sendPost(prefix: string, data: string) {
+    this.http.post(this.getURL(prefix), data).subscribe();
   }
 
 }

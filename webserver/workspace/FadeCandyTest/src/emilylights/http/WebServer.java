@@ -1,11 +1,15 @@
 package emilylights.http;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -37,7 +41,20 @@ public class WebServer {
 		@Override
 		public void handle(HttpExchange t) throws IOException {
 
-			String response = getResponse(t.getRequestURI().toString().substring(1).split("/"));
+			List<String> body = new ArrayList<String>(); 
+			String line; 
+			BufferedReader r = new BufferedReader(new InputStreamReader(t.getRequestBody())); 
+			while ((line=r.readLine()) != null) { 
+				body.add(line); 
+			} 
+			System.out.println("Body: " + Arrays.toString(body.toArray(new String[0]))); 
+			
+			String theBody = null;
+			if(body.size()> 0) {
+				theBody= body.get(0);
+			}
+
+			String response = getResponse(t.getRequestURI().toString().substring(1).split("/"), theBody);
 
 			//add all the flags n stuff
 			t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
@@ -51,7 +68,7 @@ public class WebServer {
 		}
 	}
 
-	private String getResponse(String[] urlParts) {
+	private String getResponse(String[] urlParts, String body) {
 
 		System.out.println("Request got: " + Arrays.toString(urlParts));
 
@@ -64,6 +81,9 @@ public class WebServer {
 			}
 			else if(urlParts[0].equals("delete")) {
 				animationHandler.deleteScene(Integer.parseInt(urlParts[1]));
+			}
+			else if(urlParts[0].equals("add")) {
+				
 			}
 		}
 		catch (Exception e) {
