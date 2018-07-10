@@ -62,7 +62,7 @@ export class ScenesPage {
   }
 
   itemApply(item: any) {
-    this.sendPost('set/' + item.id);
+    this.sendPost('set/' + item.id, "");
   }
 
   itemEdit(item: any) {
@@ -110,7 +110,7 @@ export class ScenesPage {
           handler: data => {
             console.log('Delete clicked');
             this.showToast(scene.name + " deleted.");
-            this.sendPost("delete/" + scene.id);
+            this.sendPost("delete/" + scene.id, "");
             this.refreshData(null);
           }
         }

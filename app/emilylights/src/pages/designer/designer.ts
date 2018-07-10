@@ -12,7 +12,7 @@ export class SceneOptionRainDrops {
   }
 
   ionViewCanLeave() {
-    DesignerPage.options = { dropLength: this.dropLength, dropValueStart: this.dropValueStart, dropMinTime: this.dropMinTime, dropMaxTime: this.dropMaxTime, speed: this.speed};
+    DesignerPage.options = { dropLength: this.dropLength, dropValueStart: this.dropValueStart, dropMinTime: this.dropMinTime, dropMaxTime: this.dropMaxTime, speed: this.speed };
   }
 
 }
@@ -24,6 +24,9 @@ export class SceneOptionCircles {
   constructor(params: NavParams) {
 
   }
+  ionViewCanLeave() {
+    DesignerPage.options = { width: this.width, speed: this.speed, dropMinTime: this.dropMinTime, dropMaxTime: this.dropMaxTime };
+  }
 }
 
 @Component({
@@ -33,6 +36,9 @@ export class SceneOptionDots {
   constructor(params: NavParams) {
 
   }
+  ionViewCanLeave() {
+    DesignerPage.options = { advance: this.advance, colorAdvance: this.colorAdvance };
+  }
 }
 
 @Component({
@@ -41,6 +47,10 @@ export class SceneOptionDots {
 export class SceneOptionGradient {
   constructor(params: NavParams) {
 
+  }
+
+  ionViewCanLeave() {
+    DesignerPage.options = { direction: this.direction, speed: this.speed, smoothness: this.smoothness };
   }
 }
 

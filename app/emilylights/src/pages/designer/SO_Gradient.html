@@ -8,7 +8,7 @@
 
     <ion-item>
         <ion-label>Direction</ion-label>
-        <ion-select [(ngModel)]="type" (ngModelChange)="setDirection(type)">
+        <ion-select [(ngModel)]="direction">
             <ion-option value="LEFT">LEFT</ion-option>
             <ion-option value="RIGHT">RIGHT</ion-option>
             <ion-option value="TOP">TOP</ion-option>
@@ -24,16 +24,15 @@
             <ion-option value="CIRCLE_IN">CIRCLE_IN</ion-option>
             <ion-option value="CIRCLE_OUT">CIRCLE_OUT</ion-option>
             <ion-option value="SOLID">SOLID</ion-option>
-
         </ion-select>
     </ion-item>
     <ion-item>
         <ion-label>Speed</ion-label>
-        <ion-input type="number" placeholder="0.5" value="0.5"></ion-input>
+        <ion-input type="number" placeholder="0.5" value="0.5" [(ngModel)]="speed"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label>Smoothness</ion-label>
-        <ion-input type="number" placeholder="2.0" value="2.0"></ion-input>
+        <ion-input type="number" placeholder="2.0" value="2.0" [(ngModel)]="smoothness"></ion-input>
     </ion-item>
 
 </ion-content>
