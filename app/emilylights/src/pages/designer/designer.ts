@@ -77,6 +77,11 @@ export class ColorPickerPage {
 
   }
 
+  ionViewCanLeave() {
+    var thisIsDumb = { hex: this.color };
+    ColorPage.colors.push(thisIsDumb);
+  }
+
 }
 
 @Component({
@@ -84,25 +89,25 @@ export class ColorPickerPage {
 })
 export class ColorPage {
 
-  colors: any[];
+  public static colors: any[] = [];
 
   constructor(public navCtrl: NavController, params: NavParams) {
-    this.colors = [
+    ColorPage.colors = DesignerPage.colors;
+    if (ColorPage.colors == null) {
+      ColorPage.colors = [];
+    }
+  }
 
-      {
-        name: 'Test',
-        hex: '#a0d831',
-      },
-      {
-        name: 'Test #2',
-        hex: '#fc52db',
-      }
-
-    ];
+  get colors() {
+    return ColorPage.colors;
   }
 
   add() {
     this.navCtrl.push(ColorPickerPage, {});
+  }
+
+  ionViewCanLeave() {
+    DesignerPage.colors = ColorPage.colors;
   }
 
 }
@@ -114,6 +119,7 @@ export class ColorPage {
 export class DesignerPage {
 
   public static options: any = {};
+  public static colors: any = [];
 
   constructor(public navCtrl: NavController, public http: Http) {
 
@@ -155,9 +161,10 @@ export class DesignerPage {
 
   createScene() {
     var postData: any = {};
-    postData.name = this.value_name; //this works cuse Ionic. TS hates this!
+    postData.name = this.value_name; //this works cause Ionic. TS hates this!
     postData.type = this.type;
     postData.options = DesignerPage.options;
+    postData.colors = DesignerPage.colors; //not exactly correct butseems to work for the most part
     this.sendPost("add", JSON.stringify(postData));
   }
 
