@@ -19,7 +19,7 @@
         <ion-item-sliding *ngFor="let scene of scenes">
             <button ion-item (click)="itemApply(scene)">
                 <ion-thumbnail item-start>
-                    <img src="{{ scene.img }}">
+                    <img src="http://192.168.1.56:8000/previmgs/{{scene.id}}">
                 </ion-thumbnail>
                 <h2>{{ scene.name }}</h2>
             </button>

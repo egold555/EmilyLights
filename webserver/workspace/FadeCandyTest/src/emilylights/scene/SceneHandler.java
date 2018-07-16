@@ -107,6 +107,9 @@ public class SceneHandler {
 		if(indexToRemove != -1) {
 			sceneDescriptors.remove(indexToRemove);
 		}
+		
+		new File("files\\previmgs\\" + id + ".gif").delete();
+		
 		saveJSON();
 	}
 	
@@ -125,7 +128,7 @@ public class SceneHandler {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		SceneDescriptorWorkaround sdw = gson.fromJson(json, SceneDescriptorWorkaround.class);
 		SceneDescriptor sd = sdw.toSceneDescriptor(getUnusedId());
-		sd.img = createSceneFromDescriptor(sd).toGif();
+		createSceneFromDescriptor(sd).toGif(sd.id);
 		return sd;
 	}
 	

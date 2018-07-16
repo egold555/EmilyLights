@@ -1,14 +1,16 @@
 package emilylights.scene;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Random;
 
 import javax.imageio.IIOException;
-import javax.imageio.stream.MemoryCacheImageOutputStream;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.imageio.stream.ImageOutputStream;
 
+import emilylights.http.WebServer;
 import emilylights.scene.options.Color;
 import emilylights.scene.options.SceneOptions;
 import emilylights.utils.GifSequenceWriter;
@@ -233,12 +235,11 @@ public abstract class Scene {
 		return min + RANDOM.nextFloat() * (max - min);
 	}
 	
-	public final String toGif() throws IIOException, IOException {
+	public final void toGif(int id) throws IIOException, IOException {
 		
-		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		MemoryCacheImageOutputStream memoryCacheImageOutputStream = new MemoryCacheImageOutputStream(byteArrayOutputStream);
+		ImageOutputStream output = new FileImageOutputStream(new File("files\\previmgs\\" + id + ".gif"));
 		
-		GifSequenceWriter writer = new GifSequenceWriter(memoryCacheImageOutputStream, BufferedImage.TYPE_INT_RGB, 33, true);
+		GifSequenceWriter writer = new GifSequenceWriter(output, BufferedImage.TYPE_INT_RGB, 33, true);
 		
 		this.overrideTime = true;
 		
@@ -273,11 +274,7 @@ public abstract class Scene {
 		this.overrideTime = false;
 		
 		writer.close();
-		memoryCacheImageOutputStream.close();
-		byteArrayOutputStream.close();
-		
-		byte[] bytes = byteArrayOutputStream.toByteArray();
-		return "data:image/gif;base64," + Base64.getEncoder().encodeToString(bytes);
+		output.close();
 	}
 
 }
