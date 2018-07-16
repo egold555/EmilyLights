@@ -31,7 +31,6 @@ public class SceneDescriptorWorkaround {
 		sd.name = name;
 		sd.id = id;
 		sd.type = type;
-		sd.img = "";
 		SceneOptions so  = new SceneOptions();
 		
 		List<Color> soColors = new ArrayList<Color>();

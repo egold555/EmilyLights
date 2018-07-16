@@ -1,9 +1,17 @@
 package emilylights.scene;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Random;
+
+import javax.imageio.IIOException;
+import javax.imageio.stream.MemoryCacheImageOutputStream;
 
 import emilylights.scene.options.Color;
 import emilylights.scene.options.SceneOptions;
+import emilylights.utils.GifSequenceWriter;
 
 public abstract class Scene {
 
@@ -16,6 +24,10 @@ public abstract class Scene {
 	public static final int PIXEL_COUNT = MAX_ROWS * MAX_COLS;
 
 	private byte[] pixels = null;
+	
+	// Use these to override the time when creating a GIF.
+	private boolean overrideTime = false;
+	private double currentTime;
 
 	public final void fillCol(int col, Color color) {
 		fillRect(0, col, MAX_ROWS - 1, col, color);
@@ -211,11 +223,61 @@ public abstract class Scene {
 	// Get time since start in seconds.
 	public final double getTime()
 	{
-		return (double)(System.currentTimeMillis() - startTime) / 1000.0;
+		if (overrideTime)
+			return currentTime;
+		else
+			return (double)(System.currentTimeMillis() - startTime) / 1000.0;
 	}
 
 	public final float randomFloatRange(float min, float max) {
 		return min + RANDOM.nextFloat() * (max - min);
+	}
+	
+	public final String toGif() throws IIOException, IOException {
+		
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		MemoryCacheImageOutputStream memoryCacheImageOutputStream = new MemoryCacheImageOutputStream(byteArrayOutputStream);
+		
+		GifSequenceWriter writer = new GifSequenceWriter(memoryCacheImageOutputStream, BufferedImage.TYPE_INT_RGB, 33, true);
+		
+		this.overrideTime = true;
+		
+		for (int milliseconds = 0; milliseconds <= 5000; milliseconds += 33) {
+			this.currentTime = (double) milliseconds / 1000.0;
+			this.reset();
+			this.draw();
+			byte[] pixels = this.getPixels();
+			int size = 23;
+			
+			BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
+			
+			// clear the image
+			for (int x = 0; x < size; ++x) {
+				for (int y = 0; y < size; ++y) {
+					image.setRGB(x, y, 0);
+				}
+			}
+			
+			// draw pixels into the image.
+			for (int row = 0; row < MAX_ROWS; ++row) {
+				for (int col = 0; col < MAX_COLS; ++col) {
+					int offset  = (row + col * MAX_ROWS) * 3;
+					int rgb = ((pixels[offset] & 0xFF) << 16) + ((pixels[offset + 1] & 0xFF) << 8) + (pixels[offset + 2] & 0xFF);
+					image.setRGB(col * 2 + 1, row * 2 + 3, rgb);
+				}
+			}
+			
+			writer.writeToSequence(image);
+		}
+		
+		this.overrideTime = false;
+		
+		writer.close();
+		memoryCacheImageOutputStream.close();
+		byteArrayOutputStream.close();
+		
+		byte[] bytes = byteArrayOutputStream.toByteArray();
+		return "data:image/gif;base64," + Base64.getEncoder().encodeToString(bytes);
 	}
 
 }

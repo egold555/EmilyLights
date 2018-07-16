@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.IIOException;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
@@ -114,15 +116,16 @@ public class SceneHandler {
 		saveJSON();
 	}
 	
-	public void previewScene(String json) {
+	public void previewScene(String json) throws IIOException, IOException {
 		SceneDescriptor sd = createForSaveAndPreview(json);
 		setScene(createSceneFromDescriptor(sd));
 	}
 	
-	private SceneDescriptor createForSaveAndPreview(String json) {
+	private SceneDescriptor createForSaveAndPreview(String json) throws IIOException, IOException {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		SceneDescriptorWorkaround sdw = gson.fromJson(json, SceneDescriptorWorkaround.class);
 		SceneDescriptor sd = sdw.toSceneDescriptor(getUnusedId());
+		sd.img = createSceneFromDescriptor(sd).toGif();
 		return sd;
 	}
 	

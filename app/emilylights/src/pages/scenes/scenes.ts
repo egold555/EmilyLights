@@ -54,7 +54,7 @@ export class ScenesPage {
     if (this.editing) {
       this.editButton = 'Done';
     } else {
-      this.editButton = 'Edit';
+      this.editButton = 'Reorder';
     }
   }
 
