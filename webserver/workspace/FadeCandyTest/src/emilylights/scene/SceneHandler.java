@@ -16,7 +16,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 import emilylights.scene.options.SceneDescriptor;
-import emilylights.scene.options.ShittyWorkaround;
+import emilylights.scene.options.workarounds.ListOfScenesWorkaround;
+import emilylights.scene.options.workarounds.SceneDescriptorWorkaround;
 import emilylights.scene.testing.SceneDummy;
 
 public class SceneHandler {
@@ -82,14 +83,14 @@ public class SceneHandler {
 	private void reloadJSON() throws JsonIOException, JsonSyntaxException, IOException {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		FileReader fileReader = new FileReader(SCENES_FILE);
-		sceneDescriptors = ((ShittyWorkaround)gson.fromJson(new JsonReader(fileReader), ShittyWorkaround.class)).scenes;
+		sceneDescriptors = ((ListOfScenesWorkaround)gson.fromJson(new JsonReader(fileReader), ListOfScenesWorkaround.class)).scenes;
 		fileReader.close();
 	}
 	
 	private void saveJSON() throws JsonIOException, IOException {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		FileWriter fileWriter = new FileWriter(SCENES_FILE);
-		gson.toJson(new ShittyWorkaround(this.sceneDescriptors), fileWriter);
+		gson.toJson(new ListOfScenesWorkaround(this.sceneDescriptors), fileWriter);
 		fileWriter.close();
 	}
 	
@@ -105,6 +106,34 @@ public class SceneHandler {
 			sceneDescriptors.remove(indexToRemove);
 		}
 		saveJSON();
+	}
+	
+	public void addScene(String json) throws JsonIOException, IOException {
+		SceneDescriptor sd = createForSaveAndPreview(json);
+		sceneDescriptors.add(sd);
+		saveJSON();
+	}
+	
+	public void previewScene(String json) {
+		SceneDescriptor sd = createForSaveAndPreview(json);
+		setScene(createSceneFromDescriptor(sd));
+	}
+	
+	private SceneDescriptor createForSaveAndPreview(String json) {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		SceneDescriptorWorkaround sdw = gson.fromJson(json, SceneDescriptorWorkaround.class);
+		SceneDescriptor sd = sdw.toSceneDescriptor(getUnusedId());
+		return sd;
+	}
+	
+	private int getUnusedId() {
+		int largest = 1;
+		for(SceneDescriptor sd : sceneDescriptors) {
+			if(sd.id > largest) {
+				largest = sd.id;
+			}
+		}
+		return largest+1;
 	}
 
 }

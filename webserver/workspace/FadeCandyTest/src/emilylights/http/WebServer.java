@@ -83,7 +83,10 @@ public class WebServer {
 				animationHandler.deleteScene(Integer.parseInt(urlParts[1]));
 			}
 			else if(urlParts[0].equals("add")) {
-				
+				animationHandler.addScene(body);
+			}
+			else if(urlParts[0].equals("preview")) {
+				animationHandler.previewScene(body);
 			}
 		}
 		catch (Exception e) {

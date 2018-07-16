@@ -16,10 +16,10 @@ public class SceneRainbow extends Scene {
 			this.direction = Direction.valueOf((String) options.customOptions.get("direction"));
 		}
 		if(options.customOptions.containsKey("speed")) {
-			this.speed = (double) options.customOptions.get("speed");
+			this.speed = Double.valueOf(options.customOptions.get("speed").toString());
 		}
 		if(options.customOptions.containsKey("smoothness")) {
-			this.smoothness = (double) options.customOptions.get("smoothness");
+			this.smoothness = Double.valueOf(options.customOptions.get("smoothness").toString());
 		}
 	}
 

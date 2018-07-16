@@ -4,16 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import emilylights.scene.options.Color;
+import emilylights.scene.options.SceneOptions;
 
 public class SceneCircles extends Scene {
-	private static final double WIDTH = 1.1F;
-	private static final double SPEED = 0.07F;
-	private static final double DROP_MIN_TIME = 2.5;
-	private static final double DROP_MAX_TIME = 8.0;
+	private double WIDTH = 1.1F;
+	private double SPEED = 0.07F;
+	private double DROP_MIN_TIME = 2.5;
+	private double DROP_MAX_TIME = 8.0;
 	
 	
 	private List<Drop> drops = new ArrayList<Drop>();
 	private double nextDrop = getTime();
+	
+	@Override
+	public void setOptions(SceneOptions options) {
+		if(options.customOptions.containsKey("width")) {
+			this.WIDTH = Double.valueOf(options.customOptions.get("width").toString());
+		}
+		if(options.customOptions.containsKey("speed")) {
+			this.SPEED = Double.valueOf(options.customOptions.get("speed").toString());
+		}
+		if(options.customOptions.containsKey("dropMinTime")) {
+			this.DROP_MIN_TIME = Double.valueOf(options.customOptions.get("dropMinTime").toString());
+		}
+		if(options.customOptions.containsKey("dropMaxTime")) {
+			this.DROP_MAX_TIME = Double.valueOf(options.customOptions.get("dropMaxTime").toString());
+		}
+	}
 	
 	@Override
 	public void draw() {

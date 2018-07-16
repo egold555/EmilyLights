@@ -4,19 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import emilylights.scene.options.Color;
+import emilylights.scene.options.SceneOptions;
 
 public class SceneRaindrops extends Scene {
 	
-	private static final int DROP_LEN = 7;
-	private static final float DROP_VALUESTART = 0.6F;
-	private static final double DROP_MIN_TIME = 0.3;
-	private static final double DROP_MAX_TIME = 1.0;
-	private static final double SPEED = 10;
+	private int DROP_LEN = 7;
+	private float DROP_VALUESTART = 0.6F;
+	private double DROP_MIN_TIME = 0.3;
+	private double DROP_MAX_TIME = 1.0;
+	private double SPEED = 10;
 	
 	
 	private List<Drop> drops = new ArrayList<Drop>();
 	private double lastAdvance = getTime();
 	private double nextDrop = getTime();
+	
+	@Override
+	public void setOptions(SceneOptions options) {
+		if(options.customOptions.containsKey("dropLength")) {
+			this.DROP_LEN = Integer.valueOf(options.customOptions.get("dropLength").toString());
+		}
+		if(options.customOptions.containsKey("dropValueStart")) {
+			this.DROP_VALUESTART = Float.valueOf(options.customOptions.get("dropValueStart").toString());
+		}
+		if(options.customOptions.containsKey("dropMinTime")) {
+			this.DROP_MIN_TIME = Double.valueOf(options.customOptions.get("dropMinTime").toString());
+		}
+		if(options.customOptions.containsKey("dropMaxTime")) {
+			this.DROP_MAX_TIME = Double.valueOf(options.customOptions.get("dropMaxTime").toString());
+		}
+		if(options.customOptions.containsKey("speed")) {
+			this.SPEED = Double.valueOf(options.customOptions.get("speed").toString());
+		}
+	}
 	
 	@Override
 	public void draw() {

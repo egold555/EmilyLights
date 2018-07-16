@@ -1,18 +1,29 @@
 package emilylights.scene;
 
 import emilylights.scene.options.Color;
+import emilylights.scene.options.SceneOptions;
 
 public class SceneDots extends Scene {
 
-	private static final float advance = 0.02f;
+	private float advance = 0.02f;
 	private float hue = 0f;
-	private static final float hueAdvance = 0.0001f;
+	private float hueAdvance = 0.0001f;
 	
 	private DotData[] dotArray = new DotData[PIXEL_COUNT];
 	
 	public SceneDots() {
 		for(int i = 0; i < PIXEL_COUNT; i++) {
 			dotArray[i] = new DotData();
+		}
+	}
+	
+	@Override
+	public void setOptions(SceneOptions options) {
+		if(options.customOptions.containsKey("advance")) {
+			this.advance = Float.valueOf(options.customOptions.get("advance").toString());
+		}
+		if(options.customOptions.containsKey("colorAdvance")) {
+			this.hueAdvance = Float.valueOf(options.customOptions.get("colorAdvance").toString());
 		}
 	}
 	

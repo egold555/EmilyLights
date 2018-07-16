@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, reorderArray, AlertController, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { DesignerPage } from '../designer/designer';
 
 @Component({
   selector: 'page-scenes',
@@ -70,6 +71,7 @@ export class ScenesPage {
   }
 
   itemAdd() {
+    this.navCtrl.push(DesignerPage, {});
 
   }
 

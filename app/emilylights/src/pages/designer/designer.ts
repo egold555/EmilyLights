@@ -8,7 +8,11 @@ import { Http } from '@angular/http';
 })
 export class SceneOptionRainDrops {
   constructor(params: NavParams) {
-
+    this.dropLength = DesignerPage.options.dropLength;
+    this.dropValueStart = DesignerPage.options.dropValueStart;
+    this.dropMinTime = DesignerPage.options.dropMinTime;
+    this.dropMaxTime = DesignerPage.options.dropMaxTime;
+    this.speed = DesignerPage.options.speed;
   }
 
   ionViewCanLeave() {
@@ -22,7 +26,7 @@ export class SceneOptionRainDrops {
 })
 export class SceneOptionCircles {
   constructor(params: NavParams) {
-
+      
   }
   ionViewCanLeave() {
     DesignerPage.options = { width: this.width, speed: this.speed, dropMinTime: this.dropMinTime, dropMaxTime: this.dropMaxTime };
@@ -160,12 +164,22 @@ export class DesignerPage {
   }
 
   createScene() {
+    var postData = this.getPostDataForScenePreviewAndCeate();
+    this.sendPost("add", JSON.stringify(postData));
+  }
+
+  previewScene() {
+    var postData = this.getPostDataForScenePreviewAndCeate();
+    this.sendPost("preview", JSON.stringify(postData));
+  }
+
+  getPostDataForScenePreviewAndCeate() {
     var postData: any = {};
     postData.name = this.value_name; //this works cause Ionic. TS hates this!
     postData.type = this.type;
     postData.options = DesignerPage.options;
     postData.colors = DesignerPage.colors; //not exactly correct butseems to work for the most part
-    this.sendPost("add", JSON.stringify(postData));
+    return postData;
   }
 
   getURL(file: string) {

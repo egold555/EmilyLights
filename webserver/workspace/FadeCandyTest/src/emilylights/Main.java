@@ -21,7 +21,7 @@ public class Main {
 	public static SceneHandler animationHandler = new SceneHandler();
 
 	private static final boolean ENABLE_WEB_SERVER = true;
-	private static final boolean ENABLE_LIGHT_WALL = true;
+	private static final boolean ENABLE_LIGHT_WALL = false;
 	private static final boolean ENABLE_TESTER = true;
 	
 	public static AudioPropertiers audioPropertiers = new AudioPropertiers();
