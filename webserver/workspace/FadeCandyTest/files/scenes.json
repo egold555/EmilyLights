@@ -245,6 +245,45 @@
           "smoothness": "2.0"
         }
       }
+    },
+    {
+      "name": "Cirlceorage",
+      "type": 2,
+      "id": 15,
+      "options": {
+        "colors": [
+          {
+            "hex": "#F25A10"
+          }
+        ],
+        "customOptions": {
+          "width": "1.1",
+          "speed": "0.07",
+          "dropMinTime": "2.5",
+          "dropMaxTime": "8"
+        }
+      }
+    },
+    {
+      "name": "Circle2",
+      "type": 2,
+      "id": 16,
+      "options": {
+        "colors": [
+          {
+            "hex": "#F25A10"
+          },
+          {
+            "hex": "#005EFF"
+          }
+        ],
+        "customOptions": {
+          "width": "1.1",
+          "speed": "0.07",
+          "dropMinTime": "2.5",
+          "dropMaxTime": "8"
+        }
+      }
     }
   ]
 }

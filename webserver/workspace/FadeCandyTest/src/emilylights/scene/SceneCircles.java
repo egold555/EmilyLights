@@ -16,6 +16,9 @@ public class SceneCircles extends Scene {
 	private List<Drop> drops = new ArrayList<Drop>();
 	private double nextDrop = getTime();
 	
+	private Color[] colors = new Color[0];
+	private int colorIndex = 0;
+	
 	@Override
 	public void setOptions(SceneOptions options) {
 		if(options.customOptions.containsKey("width")) {
@@ -29,6 +32,9 @@ public class SceneCircles extends Scene {
 		}
 		if(options.customOptions.containsKey("dropMaxTime")) {
 			this.DROP_MAX_TIME = Double.valueOf(options.customOptions.get("dropMaxTime").toString());
+		}
+		if (options.colors != null && options.colors.length > 0) {
+			this.colors = options.colors;
 		}
 	}
 	
@@ -72,9 +78,25 @@ public class SceneCircles extends Scene {
 			newDrop.column = lerp(2, MAX_COLS - 3, RANDOM.nextDouble());
 			newDrop.row = lerp(2, MAX_ROWS - 3, RANDOM.nextDouble());
 			newDrop.radius = 0;
-			newDrop.hue = (float) RANDOM.nextDouble();
-			newDrop.saturation = (float) Math.sqrt(RANDOM.nextDouble());
+			
+			if(colors.length == 0) {
+				newDrop.hue = (float) RANDOM.nextDouble();
+				newDrop.saturation = (float) Math.sqrt(RANDOM.nextDouble());
+			}
+			else {
+				int index ;
+				if (colors.length == 2)
+					index = colorIndex % 2;
+				else
+					index = RANDOM.nextInt(colors.length);
+					
+				Color color = colors[index];
+				float[] hsv = color.getHSV();
+				newDrop.hue = hsv[0];
+				newDrop.saturation = hsv[1];
+			}
 			drops.add(newDrop);
+			++colorIndex;
 			return;
 		}
 	}
