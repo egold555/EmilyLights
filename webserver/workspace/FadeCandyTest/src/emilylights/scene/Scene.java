@@ -3,14 +3,12 @@ package emilylights.scene;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.Random;
 
 import javax.imageio.IIOException;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.imageio.stream.ImageOutputStream;
 
-import emilylights.http.WebServer;
 import emilylights.scene.options.Color;
 import emilylights.scene.options.SceneOptions;
 import emilylights.utils.GifSequenceWriter;

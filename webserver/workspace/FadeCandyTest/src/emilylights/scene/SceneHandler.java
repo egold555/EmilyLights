@@ -1,7 +1,6 @@
 package emilylights.scene;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,7 +14,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 import emilylights.scene.options.SceneDescriptor;
 import emilylights.scene.options.workarounds.ListOfScenesWorkaround;

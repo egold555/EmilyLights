@@ -14,7 +14,7 @@ export class ScenesPage {
   editing: boolean = false;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: Http, public toastCtrl: ToastController) {
-    this.refreshData(null);
+
   }
 
   refreshData(refresher) {
@@ -67,12 +67,15 @@ export class ScenesPage {
   }
 
   itemEdit(item: any) {
-
+    this.navCtrl.push(DesignerPage, { id: item.id });
   }
 
   itemAdd() {
     this.navCtrl.push(DesignerPage, {});
+  }
 
+  ionViewDidEnter() {
+    this.refreshData(null);
   }
 
   showToast(msg: string) {

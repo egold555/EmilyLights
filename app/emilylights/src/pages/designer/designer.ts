@@ -172,6 +172,7 @@ export class DesignerPage {
   createScene() {
     var postData = this.getPostDataForScenePreviewAndCeate();
     this.sendPost("add", JSON.stringify(postData));
+    this.navCtrl.pop(); //go back to prev page
   }
 
   previewScene() {
