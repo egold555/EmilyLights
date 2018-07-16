@@ -9,6 +9,8 @@ public class SceneDots extends Scene {
 	private float hue = 0f;
 	private float hueAdvance = 0.0001f;
 	
+	private Color[] colors = new Color[0];
+	
 	private DotData[] dotArray = new DotData[PIXEL_COUNT];
 	
 	public SceneDots() {
@@ -25,20 +27,37 @@ public class SceneDots extends Scene {
 		if(options.customOptions.containsKey("colorAdvance")) {
 			this.hueAdvance = Float.valueOf(options.customOptions.get("colorAdvance").toString());
 		}
+		if (options.colors != null && options.colors.length >= 1) {
+			this.colors = options.colors;
+			hueAdvance = 0;
+		}
 	}
 	
 	@Override
 	public void draw() {
+		int colorIndex = 0;
 		for(int i = 0; i < PIXEL_COUNT; i++) {
 			DotData dd = dotArray[i];
 			float lightValue = (float)lerp(dd.start, dd.end, dd.current);
-			setPixel(i, new Color(hue, 1, lightValue));
+			
+			Color color;
+			if (colors.length == 0) {
+				color = new Color(hue, 1, lightValue);
+			}
+			else {
+				float[] hsv = colors[colorIndex % colors.length].getHSV();
+				color = new Color(hsv[0], hsv[1], lightValue);
+			}
+			
+			setPixel(i, color);
 			dd.current += advance;
 			if (dd.current > 1) {
 				dd.start = dd.end;
 				dd.end = RANDOM.nextFloat();
 				dd.current = 0;
             }
+			
+			colorIndex += 1;
 		}
 		hue += hueAdvance;
 	}

@@ -57,22 +57,11 @@ public class Color {
 	public int getBlue() {
 		return Integer.valueOf( hex.substring( 5, 7 ), 16 );
 	}
-
-	//	public float[] getHSV() {
-	//		return new float[] {getHue(), getSaturation(), getValue()};
-	//	}
-	//
-	//	public float getHue() {
-	//		java.awt.Color.
-	//	}
-	//	
-	//	public float getSaturation() {
-	//		
-	//	}
-	//	
-	//	public float getValue() {
-	//		
-	//	}
+	
+	public float[] getHSV()
+	{
+		return java.awt.Color.RGBtoHSB(getRed(), getGreen(), getBlue(), null);
+	}
 	
 	@Override
 	public String toString() {

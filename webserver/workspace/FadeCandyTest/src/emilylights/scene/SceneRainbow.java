@@ -9,6 +9,7 @@ public class SceneRainbow extends Scene {
 	public Direction direction = Direction.LEFT;
 	public double speed = 0.5; // higher numbers = faster motion
 	public double smoothness = 2.0; // higher numbers = colors change more slowly/smoothly.
+	public Color[] colors = new Color[0];
 
 	@Override
 	public void setOptions(SceneOptions options) {
@@ -21,6 +22,9 @@ public class SceneRainbow extends Scene {
 		if(options.customOptions.containsKey("smoothness")) {
 			this.smoothness = Double.valueOf(options.customOptions.get("smoothness").toString());
 		}
+		if (options.colors != null && options.colors.length > 0) {
+			this.colors = options.colors;
+		}
 	}
 
 
@@ -31,8 +35,44 @@ public class SceneRainbow extends Scene {
 		for (int c = 0; c < MAX_COLS; c++) {
 			for (int r = 0; r < MAX_ROWS; r++) {
 				double metric = getMetric(r, c);
-				float hue = (float) ((metric / (smoothness * 10)) + ((double)time * speed / 10.0));
-				this.setPixel(r, c, new Color(hue, 1, 1));
+				double h = ((metric / (smoothness * 10)) + ((double)time * speed / 10.0));
+				if (h >= 1 || h <= -1)
+					h = h % 1;
+				if (h < 0)
+					h += 1;
+				
+				Color color;
+				
+				if (colors.length == 0) {
+					color = new Color((float)h, 1.0F, 1.0F);					
+				}
+				else if (colors.length == 1) {
+					float[] hsvBase = colors[0].getHSV();
+					float[] hsv = new float[3];
+					hsv[0] = hsvBase[0];
+					hsv[1] = hsvBase[1];
+					if (h < 0.5) {
+						hsv[2] = (float) lerp(0, hsvBase[2], h * 2);
+					}
+					else {
+						hsv[2] = (float) lerp(hsvBase[2], 0, (h - 0.5) * 2);
+					}
+					color = new Color(hsv[0], hsv[1], hsv[2]);
+				}
+				else {
+					int index1 = (int)(h * colors.length);
+					int index2 = (index1 + 1) % colors.length;
+					float[] hsvBase1 = colors[index1].getHSV();
+					float[] hsvBase2 = colors[index2].getHSV();
+					float[] hsv = new float[3];
+					double hh = (h * colors.length) % 1.0;
+					hsv[0] = (float) lerp(hsvBase1[0], hsvBase2[0], hh);
+					hsv[1] = (float) lerp(hsvBase1[1], hsvBase2[1], hh);
+					hsv[2] = (float) lerp(hsvBase1[2], hsvBase2[2], hh);
+					color = new Color(hsv[0], hsv[1], hsv[2]);
+				}
+
+				this.setPixel(r, c, color);
 			}
 		}
 	}

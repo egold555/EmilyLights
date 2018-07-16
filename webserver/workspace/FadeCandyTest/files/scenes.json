@@ -23,6 +23,228 @@
         "colors": [],
         "customOptions": {}
       }
+    },
+    {
+      "name": "DotColorTest",
+      "type": 0,
+      "id": 5,
+      "options": {
+        "colors": [
+          {
+            "hex": "#FFEA00"
+          },
+          {
+            "hex": "#33DCFF"
+          },
+          {
+            "hex": "#EB00FF"
+          }
+        ],
+        "customOptions": {
+          "advance": "0.02",
+          "colorAdvance": "0.0001"
+        }
+      }
+    },
+    {
+      "name": "White",
+      "type": 0,
+      "id": 6,
+      "options": {
+        "colors": [
+          {
+            "hex": "#FFFFFF"
+          }
+        ],
+        "customOptions": {
+          "advance": "0.02",
+          "colorAdvance": "0.0001"
+        }
+      }
+    },
+    {
+      "name": "2colordottest",
+      "type": 0,
+      "id": 7,
+      "options": {
+        "colors": [
+          {
+            "hex": "#00EDFF"
+          },
+          {
+            "hex": "#00FF2F"
+          }
+        ],
+        "customOptions": {}
+      }
+    },
+    {
+      "name": "4colordote",
+      "type": 0,
+      "id": 8,
+      "options": {
+        "colors": [
+          {
+            "hex": "#00EDFF"
+          },
+          {
+            "hex": "#00FF2F"
+          },
+          {
+            "hex": "#FFFF00"
+          },
+          {
+            "hex": "#F800FF"
+          }
+        ],
+        "customOptions": {}
+      }
+    },
+    {
+      "name": "0color",
+      "type": 1,
+      "id": 9,
+      "options": {
+        "colors": [],
+        "customOptions": {
+          "direction": "LEFT",
+          "speed": "0.5",
+          "smoothness": "2.0"
+        }
+      }
+    },
+    {
+      "name": "1color",
+      "type": 1,
+      "id": 10,
+      "options": {
+        "colors": [
+          {
+            "hex": "#4671FF"
+          }
+        ],
+        "customOptions": {
+          "direction": "LEFT",
+          "speed": "0.5",
+          "smoothness": "2.0"
+        }
+      }
+    },
+    {
+      "name": "2color",
+      "type": 1,
+      "id": 11,
+      "options": {
+        "colors": [
+          {
+            "hex": "#4671FF"
+          },
+          {
+            "hex": "#E600FF"
+          }
+        ],
+        "customOptions": {
+          "direction": "LEFT",
+          "speed": "0.5",
+          "smoothness": "2.0"
+        }
+      }
+    },
+    {
+      "name": "color",
+      "type": 1,
+      "id": 12,
+      "options": {
+        "colors": [
+          {
+            "hex": "#4671FF"
+          },
+          {
+            "hex": "#E600FF"
+          },
+          {
+            "hex": "#01FF00"
+          },
+          {
+            "hex": "#00FFE7"
+          },
+          {
+            "hex": "#FF0040"
+          },
+          {
+            "hex": "#E4FF00"
+          }
+        ],
+        "customOptions": {
+          "direction": "LEFT",
+          "speed": "0.5",
+          "smoothness": "2.0"
+        }
+      }
+    },
+    {
+      "name": "Color4",
+      "type": 1,
+      "id": 13,
+      "options": {
+        "colors": [
+          {
+            "hex": "#4671FF"
+          },
+          {
+            "hex": "#E600FF"
+          },
+          {
+            "hex": "#01FF00"
+          },
+          {
+            "hex": "#00FFE7"
+          },
+          {
+            "hex": "#FF0040"
+          },
+          {
+            "hex": "#E4FF00"
+          }
+        ],
+        "customOptions": {
+          "direction": "LEFT",
+          "speed": "2",
+          "smoothness": "7.0"
+        }
+      }
+    },
+    {
+      "name": "Jejej",
+      "type": 1,
+      "id": 14,
+      "options": {
+        "colors": [
+          {
+            "hex": "#4671FF"
+          },
+          {
+            "hex": "#E600FF"
+          },
+          {
+            "hex": "#01FF00"
+          },
+          {
+            "hex": "#00FFE7"
+          },
+          {
+            "hex": "#FF0040"
+          },
+          {
+            "hex": "#E4FF00"
+          }
+        ],
+        "customOptions": {
+          "direction": "CIRCLE_IN",
+          "speed": "0.5",
+          "smoothness": "2.0"
+        }
+      }
     }
   ]
 }
