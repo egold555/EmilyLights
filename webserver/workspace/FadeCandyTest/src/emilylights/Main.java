@@ -11,6 +11,8 @@ import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 import emilylights.scene.Scene;
 import emilylights.scene.SceneHandler;
+import emilylights.scene.testing.SceneDummy;
+import emilylights.scene.testing.ScenePong;
 import emilylights.tester.AnimationTester;
 
 public class Main {
@@ -33,7 +35,7 @@ public class Main {
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
 		//animationHandler.setAnimation(0);
-		//animationHandler.setScene(new SceneRainbow());
+		animationHandler.setScene(new SceneDummy());
 		
 		String[] audioSources = AudioUtils.getAudioSources(audio);
 		System.out.println(Arrays.toString(audioSources));

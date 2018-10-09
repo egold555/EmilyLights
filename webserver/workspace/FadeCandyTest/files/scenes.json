@@ -284,6 +284,58 @@
           "dropMaxTime": "8"
         }
       }
+    },
+    {
+      "name": "Rain",
+      "type": 3,
+      "id": 17,
+      "options": {
+        "colors": [
+          {
+            "hex": "#4B9CF8"
+          }
+        ],
+        "customOptions": {
+          "dropLength": "7",
+          "dropValueStart": "0.6",
+          "dropMinTime": "0.3",
+          "dropMaxTime": "1",
+          "speed": "10"
+        }
+      }
+    },
+    {
+      "name": "Hgdygr",
+      "type": 1,
+      "id": 18,
+      "options": {
+        "colors": [
+          {
+            "hex": "#00FF60"
+          }
+        ],
+        "customOptions": {}
+      }
+    },
+    {
+      "name": "Uw colord",
+      "type": 1,
+      "id": 19,
+      "options": {
+        "colors": [
+          {
+            "hex": "#B121FE"
+          },
+          {
+            "hex": "#FFED4D"
+          }
+        ],
+        "customOptions": {
+          "direction": "TOP",
+          "speed": "0.5",
+          "smoothness": "2.0"
+        }
+      }
     }
   ]
 }
