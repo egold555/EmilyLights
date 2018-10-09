@@ -336,6 +336,41 @@
           "smoothness": "2.0"
         }
       }
+    },
+    {
+      "name": "Jdusid",
+      "type": 0,
+      "id": 20,
+      "options": {
+        "colors": [
+          {
+            "hex": "#B02323"
+          },
+          {
+            "hex": "#70FB1A"
+          }
+        ],
+        "customOptions": {}
+      }
+    },
+    {
+      "name": "Soyepyd",
+      "type": 1,
+      "id": 21,
+      "options": {
+        "colors": [
+          {
+            "hex": "#B93737"
+          },
+          {
+            "hex": "#007DFF"
+          },
+          {
+            "hex": "#41FF00"
+          }
+        ],
+        "customOptions": {}
+      }
     }
   ]
 }

@@ -172,8 +172,9 @@ export class DesignerPage {
   createScene() {
     var postData = this.getPostDataForScenePreviewAndCeate();
     this.sendPost("add", JSON.stringify(postData));
+    ColorPage.colors = [];
+    DesignerPage.colors = [];
     this.navCtrl.pop(); //go back to prev page
-      ColorPage.colors = null;
   }
 
   previewScene() {
