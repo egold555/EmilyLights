@@ -12,6 +12,7 @@ import emilylights.opc.OPCClient;
 import emilylights.scene.Scene;
 import emilylights.scene.SceneHandler;
 import emilylights.scene.testing.SceneDummy;
+import emilylights.scene.testing.SceneMusicGraph;
 import emilylights.scene.testing.ScenePong;
 import emilylights.tester.AnimationTester;
 
@@ -35,7 +36,7 @@ public class Main {
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
 		//animationHandler.setAnimation(0);
-		animationHandler.setScene(new SceneDummy());
+		animationHandler.setScene(new SceneMusicGraph());
 		
 		String[] audioSources = AudioUtils.getAudioSources(audio);
 		System.out.println(Arrays.toString(audioSources));
@@ -46,7 +47,7 @@ public class Main {
 		audio.SetAudioFormat();
 		audio.Set_and_Start_Mixer(1); //1 = primary microphone
 		
-		audioPropertiers.gain = 35;
+		audioPropertiers.gain = 35; //35
 
 		log("WEB_SERVER: " + ENABLE_WEB_SERVER);
 		log("LIGHT_WALL: " + ENABLE_LIGHT_WALL);

@@ -1,5 +1,7 @@
 package emilylights.scene.testing;
 
+import java.util.Arrays;
+
 import emilylights.Main;
 import emilylights.scene.Scene;
 import emilylights.scene.options.Color;
@@ -12,6 +14,7 @@ public class SceneMusicGraph extends Scene {
 		for(int bar = 0; bar < 11; bar++) {
 
 			int[] audioLevel = Main.audio.processAudio(Main.audioPropertiers);
+			System.out.println(Arrays.toString(audioLevel));
 
 			int test = (audioLevel[0] + audioLevel[1]) / 2;
 
@@ -21,7 +24,7 @@ public class SceneMusicGraph extends Scene {
 
 			test = 9 - test;
 			
-			System.out.println("Audio: " + test);
+			//System.out.println("Audio: " + test);
 			
 			this.setLineCol(bar, 8, test, new Color((float)bar/11, 1, 1));
 		}

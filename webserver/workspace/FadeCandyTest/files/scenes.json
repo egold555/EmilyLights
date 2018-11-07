@@ -393,6 +393,42 @@
         ],
         "customOptions": {}
       }
+    },
+    {
+      "name": "Test",
+      "type": 0,
+      "id": 23,
+      "options": {
+        "colors": [
+          {
+            "hex": "#D25151"
+          },
+          {
+            "hex": "#D3FE57"
+          }
+        ],
+        "customOptions": {}
+      }
+    },
+    {
+      "name": "Ee",
+      "type": 1,
+      "id": 24,
+      "options": {
+        "colors": [
+          {
+            "hex": "#FF9A9A"
+          },
+          {
+            "hex": "#3732BC"
+          }
+        ],
+        "customOptions": {
+          "direction": "BOTTOM",
+          "speed": "0.5",
+          "smoothness": "2.0"
+        }
+      }
     }
   ]
 }
