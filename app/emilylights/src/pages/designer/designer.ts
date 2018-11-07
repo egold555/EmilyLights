@@ -119,6 +119,11 @@ export class ColorPage {
   ionViewCanLeave() {
     DesignerPage.colors = ColorPage.colors;
   }
+    
+  itemDelete(color){
+     console.log(JSON.stringify(color.hex)) ;
+     ColorPage.colors = ColorPage.colors.filter(obj => obj !== color); //OO Fancy
+  }
 
 }
 

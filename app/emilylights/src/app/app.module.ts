@@ -16,6 +16,8 @@ import { ColorPicker } from '../components/color-picker/color-picker';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { NetworkInterface } from '@ionic-native/network-interface';
+
 import { ColorPage } from '../pages/designer/designer';
 import { ColorPickerPage } from '../pages/designer/designer';
 
@@ -23,6 +25,7 @@ import { SceneOptionCircles } from '../pages/designer/designer';
 import { SceneOptionDots } from '../pages/designer/designer';
 import { SceneOptionGradient } from '../pages/designer/designer';
 import { SceneOptionRainDrops } from '../pages/designer/designer';
+
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { SceneOptionRainDrops } from '../pages/designer/designer';
   providers: [
     StatusBar,
     SplashScreen,
+    NetworkInterface,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

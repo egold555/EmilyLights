@@ -371,6 +371,28 @@
         ],
         "customOptions": {}
       }
+    },
+    {
+      "name": "ImBlue",
+      "type": 0,
+      "id": 22,
+      "options": {
+        "colors": [
+          {
+            "hex": "#1034F2"
+          },
+          {
+            "hex": "#4EE8FF"
+          },
+          {
+            "hex": "#0086FF"
+          },
+          {
+            "hex": "#19FFEB"
+          }
+        ],
+        "customOptions": {}
+      }
     }
   ]
 }
