@@ -1,4 +1,4 @@
-package emilylights.audio2;
+package emilylights.audio2.oscilloscope;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

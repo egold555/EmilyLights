@@ -4,13 +4,18 @@ import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.Arrays;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Mixer;
+
 import emilylights.audio.Audio;
 import emilylights.audio.AudioPropertiers;
 import emilylights.audio.AudioUtils;
+import emilylights.audio2.oscilloscope.Shared;
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 import emilylights.scene.Scene;
 import emilylights.scene.SceneHandler;
+import emilylights.scene.testing.SceneConnect4;
 import emilylights.scene.testing.SceneDummy;
 import emilylights.scene.testing.SceneMusicGraph;
 import emilylights.scene.testing.ScenePong;
@@ -27,8 +32,8 @@ public class Main {
 	private static final boolean ENABLE_LIGHT_WALL = true;
 	private static final boolean ENABLE_TESTER = true;
 	
-	public static AudioPropertiers audioPropertiers = new AudioPropertiers();
-	public static Audio audio = new Audio();;
+	//public static AudioPropertiers audioPropertiers = new AudioPropertiers();
+	//public static Audio audio = new Audio();;
 	
 	public static void main(String[] args) throws InterruptedException, IOException {
 
@@ -36,18 +41,24 @@ public class Main {
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
 		//animationHandler.setAnimation(0);
-		animationHandler.setScene(new SceneMusicGraph());
+		Mixer mixer = AudioSystem.getMixer(Shared.getMixerInfo(false, true).get(1));
+		//animationHandler.setScene(new SceneMusicGraph(mixer));
+		animationHandler.setScene(new SceneConnect4());
 		
-		String[] audioSources = AudioUtils.getAudioSources(audio);
-		System.out.println(Arrays.toString(audioSources));
+//		String[] audioSources = AudioUtils.getAudioSources(audio);
+//		System.out.println(Arrays.toString(audioSources));
 		
-		audioPropertiers.fft_binns = (int)(1.5f * Math.max(11, 9));
-        audioPropertiers.fft = new float[audioPropertiers.fft_binns];
+//		audioPropertiers.fft_binns = (int)(1.5f * Math.max(11, 9));
+//        audioPropertiers.fft = new float[audioPropertiers.fft_binns];
+//		
+//		audio.SetAudioFormat();
+//		audio.Set_and_Start_Mixer(1); //1 = primary microphone
+//		
+//		audioPropertiers.gain = 35; //35
 		
-		audio.SetAudioFormat();
-		audio.Set_and_Start_Mixer(1); //1 = primary microphone
-		
-		audioPropertiers.gain = 35; //35
+		for(Mixer.Info info : Shared.getMixerInfo(false, true)){
+			System.out.println(info.getName());
+		}
 
 		log("WEB_SERVER: " + ENABLE_WEB_SERVER);
 		log("LIGHT_WALL: " + ENABLE_LIGHT_WALL);

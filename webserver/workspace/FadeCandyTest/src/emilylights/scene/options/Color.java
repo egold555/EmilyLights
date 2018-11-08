@@ -4,6 +4,16 @@ import java.util.Arrays;
 
 public class Color {
 
+	public static final Color COLOR_RED = new Color(255,0,0);
+	public static final Color COLOR_YELLOW = new Color(255,255,0);
+	public static final Color COLOR_GREEN = new Color(0,255,0);
+	public static final Color COLOR_TURQUOISE = new Color(0,255,255);
+	public static final Color COLOR_BLUE = new Color(0,0,255);
+	public static final Color COLOR_PURPLE = new Color(255,0,255);
+	public static final Color COLOR_WHITE = new Color(255,255,255);
+	public static final Color COLOR_BLACK = new Color(0,0,0);
+	
+	
 	public static Color RAINBOW = new Color("#RAINBOW");
 
 	private final String hex;
@@ -65,7 +75,8 @@ public class Color {
 	
 	@Override
 	public String toString() {
-		return "Color [isRainbow()=" + isRainbow() + ", getHex()=" + getHex() + ", getRGB()=" + Arrays.toString(getRGB()) + "]";
+		//return "Color [isRainbow()=" + isRainbow() + ", getHex()=" + getHex() + ", getRGB()=" + Arrays.toString(getRGB()) + "]";
+		return "Color[" + Arrays.toString(getRGB()) + "]";
 	}
 
 	
@@ -139,6 +150,15 @@ public class Color {
 		if (bs.length() == 1)
 			bs = "0" + bs;
 		return "#" + rs + gs + bs;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Color) {
+			Color cobj = (Color)obj;
+			return cobj.getHex().equals(this.getHex());
+		}
+		return super.equals(obj);
 	}
 
 }

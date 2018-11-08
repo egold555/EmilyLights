@@ -117,6 +117,9 @@ public class WebServer {
 			else if(urlParts[0].equals("preview")) {
 				animationHandler.previewScene(body);
 			}
+			else if(urlParts[0].equals("scenedata")) {
+				animationHandler.sceneData(body, urlParts);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();

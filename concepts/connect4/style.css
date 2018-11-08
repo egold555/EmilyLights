@@ -1,0 +1,37 @@
+body {
+  text-align: center;
+}
+
+#connect4 {
+  background-color: yellow;
+  display: inline-block;
+}
+
+.col {
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  background-color: white;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.col.empty {
+  cursor: pointer;
+}
+
+.next-red {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.next-black {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.col.red {
+  background-color: red;
+}
+
+.col.black {
+  background-color: black;
+}

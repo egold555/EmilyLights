@@ -84,6 +84,25 @@ public abstract class Scene {
 		pixels[offset+1] = (byte) color.getGreen();
 		pixels[offset+2] = (byte) color.getBlue();
 	}
+	
+	public final Color getPixel(int row, int col) {
+		if (row < 0 || row >= MAX_ROWS || col < 0 || col >= MAX_COLS)
+			return new Color(0,0,0);
+		return getPixel(row + col * MAX_ROWS);
+	}
+	
+	public final Color getPixel(int num)
+	{
+		if (num < 0 || num >= PIXEL_COUNT) {
+			return new Color(0,0,0);
+		}
+
+		int offset = num * 3;
+		int red = pixels[offset] & 0xFF;
+		int green = pixels[offset+1] & 0xFF;
+		int blue = pixels[offset+2] & 0xFF;
+		return new Color(red, green, blue);
+	}
 
 
 	public final void addPixel(int row, int col, Color color) {
@@ -273,6 +292,11 @@ public abstract class Scene {
 		
 		writer.close();
 		output.close();
+	}
+
+	public void onRecieveData(String body, String[] urlParts) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

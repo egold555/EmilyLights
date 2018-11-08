@@ -140,4 +140,8 @@ public class SceneHandler {
 		return largest+1;
 	}
 
+	public void sceneData(String body, String[] urlParts) {
+		getAnimation().onRecieveData(body, urlParts);
+	}
+
 }
