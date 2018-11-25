@@ -49,10 +49,10 @@ public class Main {
 //			System.out.println(info.getName());
 //		}
 
-		log("WEB_SERVER: " + ENABLE_WEB_SERVER);
-		log("LIGHT_WALL: " + ENABLE_LIGHT_WALL);
-		log("TESTER: " + ENABLE_TESTER);
-		log("");
+		//log("WEB_SERVER: " + ENABLE_WEB_SERVER);
+		//log("LIGHT_WALL: " + ENABLE_LIGHT_WALL);
+		//log("TESTER: " + ENABLE_TESTER);
+		//log("");
 
 		if(ENABLE_TESTER) {
 			EventQueue.invokeLater(() -> {

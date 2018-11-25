@@ -51,7 +51,7 @@ public class WebServer {
 			while ((line=r.readLine()) != null) { 
 				body.add(line); 
 			} 
-			System.out.println("Body: " + Arrays.toString(body.toArray(new String[0]))); 
+			//System.out.println("Body: " + Arrays.toString(body.toArray(new String[0]))); 
 
 			String theBody = null;
 			if(body.size()> 0) {
@@ -126,7 +126,7 @@ public class WebServer {
 
 	private String getResponse(String[] urlParts, String body) {
 
-		System.out.println("Request got: " + Arrays.toString(urlParts));
+		//System.out.println("Request got: " + Arrays.toString(urlParts));
 
 		try {
 			if(urlParts[0].equals("scenes.json")) {
