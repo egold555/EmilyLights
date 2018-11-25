@@ -82,11 +82,38 @@ public class WebServer {
 				catch(Exception e) {
 					e.printStackTrace();
 					String response = "Could not find " + urlParts[1];
-					t.sendResponseHeaders(200, response.getBytes().length);
+					t.sendResponseHeaders(404, response.getBytes().length);
 					os.write(response.getBytes());
 					System.err.println(response);
 				}
 			} 
+			else if(urlParts[0].equals("www")) {
+				
+				String joined = String.join("\\", urlParts);
+				
+				int i = joined.indexOf("?");
+				if(i > 0) {
+					joined = joined.substring(0, i);
+				}
+				
+				if(urlParts.length == 1) {
+					joined = "www\\index.html";
+				}
+
+				File file = new File("files\\" + joined);
+				
+				if(file.exists()) {
+					t.sendResponseHeaders(200, file.length());
+					Files.copy(file.toPath(), os);
+				} 
+				else {
+					String response = "Could not find " + urlParts[1];
+					t.sendResponseHeaders(404, response.getBytes().length);
+					os.write(response.getBytes());
+					System.err.println(response);
+				}
+				
+			}
 			else {
 				String response = getResponse(urlParts, theBody);
 				t.sendResponseHeaders(200, response.getBytes().length);

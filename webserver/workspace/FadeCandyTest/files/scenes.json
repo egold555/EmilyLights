@@ -429,6 +429,48 @@
           "smoothness": "2.0"
         }
       }
+    },
+    {
+      "name": "Phone",
+      "type": 1,
+      "id": 25,
+      "options": {
+        "colors": [
+          {
+            "hex": "#DC2323"
+          },
+          {
+            "hex": "#00FF4E"
+          },
+          {
+            "hex": "#546A9D"
+          },
+          {
+            "hex": "#FEC9FF"
+          },
+          {
+            "hex": "#EAFB16"
+          }
+        ],
+        "customOptions": {
+          "direction": "CIRCLE_OUT",
+          "speed": "0.5",
+          "smoothness": "2.0"
+        }
+      }
+    },
+    {
+      "name": "sdasdasd",
+      "type": 1,
+      "id": 26,
+      "options": {
+        "colors": [
+          {
+            "hex": "#79D69D"
+          }
+        ],
+        "customOptions": {}
+      }
     }
   ]
 }

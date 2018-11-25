@@ -21,7 +21,7 @@ export class ScenesPage {
 
     this.http.post(this.getURL("scenes.json"), '').subscribe(
       data => {
-        var dataRecieved = data._body; //._body ???
+        var dataRecieved = data.text(); //._body ???
         //console.log(JSON.stringify(data));
         console.log(JSON.parse(dataRecieved).scenes);
         this.scenes = JSON.parse(dataRecieved).scenes;

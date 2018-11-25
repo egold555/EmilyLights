@@ -7,6 +7,13 @@ import { Http } from '@angular/http';
   templateUrl: 'SO_RainDrops.html'
 })
 export class SceneOptionRainDrops {
+    
+    dropLength: number;
+    dropValueStart: number;
+    dropMinTime: number;
+    dropMaxTime: number;
+    speed: number;
+    
   constructor(params: NavParams) {
     this.dropLength = DesignerPage.options.dropLength;
     this.dropValueStart = DesignerPage.options.dropValueStart;
@@ -25,6 +32,12 @@ export class SceneOptionRainDrops {
   templateUrl: 'SO_Circles.html'
 })
 export class SceneOptionCircles {
+    
+    width: number;
+    speed: number;
+    dropMinTime: number;
+    dropMaxTime: number;
+    
   constructor(params: NavParams) {
     this.width = DesignerPage.options.width;
     this.speed = DesignerPage.options.speed;
@@ -40,6 +53,10 @@ export class SceneOptionCircles {
   templateUrl: 'SO_Dots.html'
 })
 export class SceneOptionDots {
+    
+    advance: number;
+    colorAdvance:number;
+    
   constructor(params: NavParams) {
     this.advance = DesignerPage.options.advance;
     this.colorAdvance = DesignerPage.options.colorAdvance;
@@ -53,6 +70,11 @@ export class SceneOptionDots {
   templateUrl: 'SO_Gradient.html'
 })
 export class SceneOptionGradient {
+    
+    direction: number;
+    speed: number;
+    smoothness: number;
+    
   constructor(params: NavParams) {
     this.direction = DesignerPage.options.direction;
     this.speed = DesignerPage.options.speed;
@@ -133,6 +155,9 @@ export class ColorPage {
 })
 export class DesignerPage {
 
+    type: string;
+    value_name: string;
+    
   public static options: any = {};
   public static colors: any = [];
 
@@ -189,7 +214,7 @@ export class DesignerPage {
 
   getPostDataForScenePreviewAndCeate() {
     var postData: any = {};
-    postData.name = this.value_name; //this works cause Ionic. TS hates this!
+    postData.name = this.value_name;
     postData.type = this.type;
     postData.options = DesignerPage.options;
     postData.colors = DesignerPage.colors; //not exactly correct butseems to work for the most part

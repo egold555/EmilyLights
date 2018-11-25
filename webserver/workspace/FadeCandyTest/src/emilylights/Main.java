@@ -2,23 +2,12 @@ package emilylights;
 
 import java.awt.EventQueue;
 import java.io.IOException;
-import java.util.Arrays;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Mixer;
-
-import emilylights.audio.Audio;
-import emilylights.audio.AudioPropertiers;
-import emilylights.audio.AudioUtils;
-import emilylights.audio2.oscilloscope.Shared;
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
 import emilylights.scene.Scene;
+import emilylights.scene.SceneBoot;
 import emilylights.scene.SceneHandler;
-import emilylights.scene.testing.SceneConnect4;
-import emilylights.scene.testing.SceneDummy;
-import emilylights.scene.testing.SceneMusicGraph;
-import emilylights.scene.testing.ScenePong;
 import emilylights.tester.AnimationTester;
 
 public class Main {
@@ -41,9 +30,9 @@ public class Main {
 		AnimationTester ex = new AnimationTester();
 		WebServer webServer = new WebServer(animationHandler);
 		//animationHandler.setAnimation(0);
-		Mixer mixer = AudioSystem.getMixer(Shared.getMixerInfo(false, true).get(1));
+//		Mixer mixer = AudioSystem.getMixer(Shared.getMixerInfo(false, true).get(1));
 		//animationHandler.setScene(new SceneMusicGraph(mixer));
-		animationHandler.setScene(new SceneConnect4());
+		animationHandler.setScene(new SceneBoot());
 		
 //		String[] audioSources = AudioUtils.getAudioSources(audio);
 //		System.out.println(Arrays.toString(audioSources));
@@ -56,9 +45,9 @@ public class Main {
 //		
 //		audioPropertiers.gain = 35; //35
 		
-		for(Mixer.Info info : Shared.getMixerInfo(false, true)){
-			System.out.println(info.getName());
-		}
+//		for(Mixer.Info info : Shared.getMixerInfo(false, true)){
+//			System.out.println(info.getName());
+//		}
 
 		log("WEB_SERVER: " + ENABLE_WEB_SERVER);
 		log("LIGHT_WALL: " + ENABLE_LIGHT_WALL);
