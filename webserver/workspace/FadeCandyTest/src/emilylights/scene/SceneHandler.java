@@ -24,7 +24,7 @@ public class SceneHandler {
 
 	private Scene currentAnimation = new SceneDummy();
 	private List<SceneDescriptor> sceneDescriptors = new ArrayList<SceneDescriptor>();
-	private static final File SCENES_FILE = new File("files\\scenes.json");
+	private static final File SCENES_FILE = new File("files" + File.separator + "scenes.json");
 
 	public SceneHandler() {
 		try {
@@ -106,7 +106,7 @@ public class SceneHandler {
 			sceneDescriptors.remove(indexToRemove);
 		}
 		
-		new File("files\\previmgs\\" + id + ".gif").delete();
+		new File("files"+File.separator +"previmgs" + File.separator + id + ".gif").delete();
 		
 		saveJSON();
 	}

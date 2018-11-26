@@ -22,7 +22,7 @@ public class SceneAnimatedImage extends Scene{
 	public SceneAnimatedImage(String[] image, double frameTime) throws IOException {
 		this.frameTime = frameTime;
 		for(int i = 0; i < image.length; i++) {
-			img.add(ImageIO.read(new File("files\\" + image[i] + ".png")));
+			img.add(ImageIO.read(new File("files" + File.separator + image[i] + ".png")));
 		}
 	}
 	

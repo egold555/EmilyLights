@@ -222,7 +222,7 @@ export class DesignerPage {
   }
 
   getURL(file: string) {
-    return "http://192.168.1.56:8000/" + file;
+    return "/" + file;
   }
 
   sendPost(prefix: string, data: string) {

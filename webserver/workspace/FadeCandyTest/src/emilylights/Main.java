@@ -2,6 +2,11 @@ package emilylights;
 
 import java.awt.EventQueue;
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.Enumeration;
 
 import emilylights.http.WebServer;
 import emilylights.opc.OPCClient;
@@ -12,22 +17,33 @@ import emilylights.tester.AnimationTester;
 
 public class Main {
 
-	private static final String IP = "192.168.1.122";
+	private static final boolean DEPLOYED_TO_PI = true; //CHANGE ME
+	
+	private static final String IP = DEPLOYED_TO_PI ? "127.0.0.1" : "192.168.1.122";
 	private static int PORT = 7890;
 	
 	public static SceneHandler animationHandler = new SceneHandler();
 
 	private static final boolean ENABLE_WEB_SERVER = true;
 	private static final boolean ENABLE_LIGHT_WALL = true;
-	private static final boolean ENABLE_TESTER = true;
+	public static final boolean ENABLE_TESTER = !DEPLOYED_TO_PI;
 	
 	//public static AudioPropertiers audioPropertiers = new AudioPropertiers();
 	//public static Audio audio = new Audio();;
 	
 	public static void main(String[] args) throws InterruptedException, IOException {
 
+		String webserverIp = waitForLocalIPAddress();
+		System.out.println("Local IP Address: " + webserverIp);
+		Thread.sleep(5000);
+		
 		OPCClient opc = new OPCClient(IP, PORT);
-		AnimationTester ex = new AnimationTester();
+		AnimationTester animTester = null;
+		if(ENABLE_TESTER) {
+			animTester = new AnimationTester();
+		}
+		final AnimationTester ex = animTester;
+		
 		WebServer webServer = new WebServer(animationHandler);
 		//animationHandler.setAnimation(0);
 //		Mixer mixer = AudioSystem.getMixer(Shared.getMixerInfo(false, true).get(1));
@@ -61,12 +77,12 @@ public class Main {
 		}
 
 		if(ENABLE_WEB_SERVER) {
-			webServer.start();
+			webServer.start(webserverIp);
 		}
 		
 		//animationHandler.reloadJSON();
 
-		log("Running animation..");
+		log("Running.");
 		log("Press ENTER to exit.");
 		while (System.in.available() == 0) {
 			Scene animation = animationHandler.getAnimation();
@@ -89,6 +105,42 @@ public class Main {
 		System.exit(0);
 
 	}
+	
+	// Wait until we have a local IP address, then return it.
+	public static String waitForLocalIPAddress() {
+		String ip;
+		while (true) {
+			ip = getLocalIPAddress();
+			if (ip != null) {
+				return ip;
+			}
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
+		}
+	}
+	
+	public static String getLocalIPAddress() {
+		try {
+	        Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+	        for (NetworkInterface netint : Collections.list(nets)) {
+	            Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+		        for (InetAddress inetAddress : Collections.list(inetAddresses)) {
+		            if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress() && inetAddress instanceof Inet4Address) {
+		            	return inetAddress.toString().substring(1);
+		            }
+		        }
+			}
+		}
+		catch (Exception e) {
+			return null;
+		}
+		
+		return null;
+    }
+
 
 	private static void log(String s) {
 		System.out.println(s);

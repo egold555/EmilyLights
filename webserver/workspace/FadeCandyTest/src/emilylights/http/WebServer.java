@@ -27,9 +27,9 @@ public class WebServer {
 		this.animationHandler = animationHandler;
 	}
 
-	public void start() {
+	public void start(String ip) {
 		try {
-			IP_AND_PORT = new InetSocketAddress(Inet4Address.getLocalHost().getHostAddress(), 8000); //get correct 1.9 or 10. address and not 0.0.0.0
+			IP_AND_PORT = new InetSocketAddress(ip, 8000); //get correct 1.9 or 10. address and not 0.0.0.0
 			System.out.println("Host: " + IP_AND_PORT.getHostName() + ":" + IP_AND_PORT.getPort());
 			HttpServer server = HttpServer.create(IP_AND_PORT, 0);
 			server.createContext("/", new MyHandler());
@@ -67,7 +67,7 @@ public class WebServer {
 
 			if(urlParts.length > 1 && urlParts[0].equals("previmgs")){
 				try {
-					File file = new File("files\\previmgs\\" + urlParts[1] + ".gif");
+					File file = new File("files"+ File.separator + "previmgs" + File.separator + urlParts[1] + ".gif");
 					if(file.exists()) {
 						t.sendResponseHeaders(200, file.length());
 						Files.copy(file.toPath(), os);
@@ -89,7 +89,7 @@ public class WebServer {
 			} 
 			else if(urlParts[0].equals("www")) {
 				
-				String joined = String.join("\\", urlParts);
+				String joined = String.join(File.separator, urlParts);
 				
 				int i = joined.indexOf("?");
 				if(i > 0) {
@@ -97,10 +97,10 @@ public class WebServer {
 				}
 				
 				if(urlParts.length == 1) {
-					joined = "www\\index.html";
+					joined = "www"+ File.separator + "index.html";
 				}
 
-				File file = new File("files\\" + joined);
+				File file = new File("files" + File.separator + joined);
 				
 				if(file.exists()) {
 					t.sendResponseHeaders(200, file.length());
@@ -130,7 +130,7 @@ public class WebServer {
 
 		try {
 			if(urlParts[0].equals("scenes.json")) {
-				return new String(Files.readAllBytes(new File("files\\scenes.json").toPath()));
+				return new String(Files.readAllBytes(new File("files" + File.separator +"scenes.json").toPath()));
 			}
 			else if(urlParts[0].equals("set")) {
 				animationHandler.setScene(Integer.parseInt(urlParts[1]));

@@ -10,7 +10,7 @@ import { DesignerPage } from '../designer/designer';
 export class ScenesPage {
 
   scenes: any[];
-  editButton: string = 'Edit';
+  editButton: string = 'Reorder';
   editing: boolean = false;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: Http, public toastCtrl: ToastController) {
@@ -42,7 +42,7 @@ export class ScenesPage {
   }
 
   getURL(file: string) {
-    return "http://192.168.1.56:8000/" + file;
+    return "/" + file;
   }
 
   sendPost(prefix: string, data: string) {

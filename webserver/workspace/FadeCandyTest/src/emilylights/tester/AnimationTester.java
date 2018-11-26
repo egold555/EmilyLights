@@ -2,6 +2,8 @@ package emilylights.tester;
 
 import javax.swing.JFrame;
 
+import emilylights.Main;
+
 public class AnimationTester extends JFrame {
   
 	private static final long serialVersionUID = -273960672007366769L;
@@ -9,7 +11,7 @@ public class AnimationTester extends JFrame {
 	public PixelPanel panel;
 	
     public AnimationTester() {
-        initUI();
+      initUI();
     }
 
     private void initUI() {

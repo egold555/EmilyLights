@@ -19,12 +19,12 @@
         <ion-item-sliding *ngFor="let scene of scenes">
             <button ion-item (click)="itemApply(scene)">
                 <ion-thumbnail item-start>
-                    <img src="http://192.168.1.56:8000/previmgs/{{scene.id}}">
+                    <img src="/previmgs/{{scene.id}}">
                 </ion-thumbnail>
                 <h2>{{ scene.name }}</h2>
             </button>
             <ion-item-options>
-                <button ion-button (click)="itemEdit(scene)" color="secondary" icon-start><ion-icon name="brush"></ion-icon>Edit</button>
+<!--                <button ion-button (click)="itemEdit(scene)" color="secondary" icon-start><ion-icon name="brush"></ion-icon>Edit</button>-->
                 <button ion-button (click)="itemDelete(scene)" color="danger" icon-start><ion-icon name="trash"></ion-icon>Delete</button>
             </ion-item-options>
 

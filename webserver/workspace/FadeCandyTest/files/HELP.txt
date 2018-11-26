@@ -1,0 +1,17 @@
+Compiling Changes:
+
+    ionic cordova build browser --verbose
+    Copy the WWW directory to the web server WWW directory. Try not to overwite the manifest file or the logo file
+    
+
+Deploying to the PI:
+
+    Make change for IP on line 15 in Main.java
+    Disable Tester
+    Compile the server jar
+    Copy it and the files folder to the PI.
+    
+    
+Good things to know:
+    PI fcserver files: /usr/local/bin
+    Server Dir: /home/pi/Documents/Server

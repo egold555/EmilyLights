@@ -254,7 +254,7 @@ public abstract class Scene {
 	
 	public final void toGif(int id) throws IIOException, IOException {
 		
-		ImageOutputStream output = new FileImageOutputStream(new File("files\\previmgs\\" + id + ".gif"));
+		ImageOutputStream output = new FileImageOutputStream(new File("files" + File.separator + "previmgs" + File.separator + id + ".gif"));
 		
 		GifSequenceWriter writer = new GifSequenceWriter(output, BufferedImage.TYPE_INT_RGB, 33, true);
 		
