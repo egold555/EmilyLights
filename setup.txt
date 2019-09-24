@@ -1,0 +1,5 @@
+To set up:
+
+1. Find local ip address. From Windows PC, type "ping -4 raspberrypi.local"
+2. From phone, go to xxx.xxx.xxx.xxx:8000/www/index.html
+3. Wait a while to load.
